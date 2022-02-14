@@ -8,6 +8,6 @@ Megan Skeen
 Garrett Powell
 
 Roles:
-Christa Greenwood -
-Megan Skeen - 
-Garrett Powell - 
+Christa Greenwood - Developer 
+Megan Skeen - Documenter 
+Garrett Powell - Tester
