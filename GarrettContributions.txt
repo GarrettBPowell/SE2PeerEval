@@ -1,9 +1,0 @@
-Garrett's strengths and contributions to the team:
-
-Strengths:
-	Organized
-	Punctual
-	Experience in the QA field
-
-Contributions:
-	Testing
