@@ -11,3 +11,10 @@ Roles:
 Christa Greenwood - Developer 
 Megan Skeen - Documenter 
 Garrett Powell - Tester
+
+
+Glossary:
+Evaluations
+Team
+Team Member
+
