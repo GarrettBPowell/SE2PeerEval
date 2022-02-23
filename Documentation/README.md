@@ -17,6 +17,8 @@ Evaluations
 Feedback
 Team
 Team Member
+Numerical Evaluation 
+Written Evaluation 
 
 Abstract Classes:
 
