@@ -1,0 +1,23 @@
+/*************************************************
+*	Author: Christa Greenwood
+*	Class: CS 375.01 - Spring 2022
+*	Task: Sequence Diagram 3
+*
+*	Creates a png file with a sequence diagram
+*	for the process of outputting evaluation
+*	data.
+*
+*	How to run/execute:
+*		java -jar plantuml.jar fight-sequence-3-cgg20a.dot
+*		(java -jar plantuml-1.2022.1.jar fight-sequence-3-cgg20a.dot)
+*
+*************************************************/
+
+@startuml
+TeamMember -> Evaluation: getEval()
+WrittenEval //- Evaluation: getKeywords()
+WrittenEval --> Evaluation: keywords
+NumericalEval //- Evaluation: getScore()
+NumericalEval --> Evaluation: score
+Evaluation -> Evaluation: printEval()
+@enduml
