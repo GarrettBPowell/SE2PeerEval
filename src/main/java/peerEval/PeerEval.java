@@ -1,4 +1,6 @@
 package peerEval;
+import java.io.*;  
+import java.util.Scanner; 
 
 /***********************************
 *	Authors: Christa Greenwood, Garrett Powell, Megan Skeen
@@ -18,8 +20,39 @@ package peerEval;
 ************************************/
 public class PeerEval
 {
-    public static void main( String[] args )
+    public static String filePath;
+
+    public static void main( String[] args ) throws Exception
     {
         System.out.println( "Hello World!" );
+        filePath = "sampleCSV.csv";
+        //readCSV();
+ 
+        // Parses CSV file
+        Scanner csv = new Scanner(new File(filePath));  
+        csv.useDelimiter(",");
+        
+        // Displays data from CSV file
+        while (csv.hasNext())
+        {  
+        System.out.print(csv.next() + " ");
+        }   
+        // Closes scanner
+        csv.close();
+    }
+
+    public static void readCSV()
+    {
+        // Parses CSV file
+        // Scanner csv = new Scanner(new File(filePath));  
+        // csv.useDelimiter(",");
+
+        // Displays data from CSV file
+        // while (csv.hasNext())
+        // {  
+        // System.out.print(csv.next() + " ");
+        // }   
+        // Closes scanner
+        // csv.close();
     }
 }
