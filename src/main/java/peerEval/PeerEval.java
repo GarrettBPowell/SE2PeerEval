@@ -22,12 +22,14 @@ public class PeerEval
 {
     public static String filePath;
 
-    public static void main( String[] args ) throws Exception
+    public void main( String[] args ) throws Exception
     {
-        System.out.println( "Hello World!" );
+        
         filePath = "sampleCSV.csv";
+        System.out.println(this.getClass().getResource(filePath));
         //readCSV();
  
+        /*
         // Parses CSV file
         Scanner csv = new Scanner(new File(filePath));  
         csv.useDelimiter(",");
@@ -39,20 +41,23 @@ public class PeerEval
         }   
         // Closes scanner
         csv.close();
-    }
 
+        */
+    }
+   
+    /*
     public static void readCSV()
     {
-        // Parses CSV file
-        // Scanner csv = new Scanner(new File(filePath));  
-        // csv.useDelimiter(",");
+         //Parses CSV file
+         Scanner csv = new Scanner(new File(this.getClass().getResource(filePath)));  
+         csv.useDelimiter(",");
 
-        // Displays data from CSV file
-        // while (csv.hasNext())
-        // {  
-        // System.out.print(csv.next() + " ");
-        // }   
-        // Closes scanner
-        // csv.close();
-    }
+         //Displays data from CSV file
+         while (csv.hasNext())
+         {  
+         System.out.print(csv.next() + " ");
+         }   
+         //Closes scanner
+         csv.close();
+    }*/
 }
