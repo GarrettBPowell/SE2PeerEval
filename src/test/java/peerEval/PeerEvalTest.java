@@ -10,20 +10,12 @@ import org.junit.Test;
  */
 public class PeerEvalTest 
 {
-
-    
     @Test
     public void shouldAnswerWithTrue()
     {
         PeerEval test = new PeerEval();
 
-        InputStream is = test.getFileAsIOStream("sampleCSV.csv");
-        test.printFileContent(is);
-        
-        is = test.getFileAsIOStream("sampleCSV.csv");
-        test.printFileContent(is);
-
+        InputStream is = test.loadFile("sampleCSV.csv");
+        test.printFile(is);
     }
-     
-   
 }

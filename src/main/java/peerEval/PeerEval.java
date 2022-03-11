@@ -29,27 +29,29 @@ public class PeerEval
         
     }
 
-    public InputStream getFileAsIOStream(final String fileName) 
+    public InputStream loadFile(final String fileName) 
     {
-        InputStream ioStream = this.getClass()
-            .getClassLoader()
-            .getResourceAsStream(fileName);
+        InputStream ioStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
         
+        //catch if name is empty
         if (ioStream == null) {
             throw new IllegalArgumentException(fileName + " is not found");
         }
         return ioStream;
     }
 
-    public void printFileContent(InputStream is)
+    public void printFile(InputStream is)
     {
-        try (InputStreamReader isr = new InputStreamReader(is); 
-                BufferedReader br = new BufferedReader(isr);) 
+        try (InputStreamReader isr = new InputStreamReader(is); BufferedReader br = new BufferedReader(isr);) 
         {
             String line;
-            while ((line = br.readLine()) != null) {
+
+            while ((line = br.readLine()) != null) 
+            {
                 System.out.println(line);
             }
+
+            //close the file
             is.close();
         }
         catch(IOException e)
