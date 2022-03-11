@@ -13,7 +13,8 @@ Megan Skeen - Documenter
 Garrett Powell - Tester
 
 Glossary:
-* Evaluation
+- Evaluation
+
  - An Evaluation is a set of answers returned based off of the survey presented. 
 - Survey 
  - A Survey is a set of questions presented to a team member. 
