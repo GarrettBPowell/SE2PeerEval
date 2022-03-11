@@ -14,6 +14,8 @@ import java.io.*;
  */
 public class PeerEvalTest 
 {
+
+    //this tests the the input steam opens with given file name
     @Test
     public void ReadCSV()
     {
@@ -28,6 +30,7 @@ public class PeerEvalTest
         }
     }
 
+    //this tests that the buffered reader can be created with the given file name
     @Test
     public void getBR()
     {
@@ -75,6 +78,7 @@ public class PeerEvalTest
            String[] lineOne = br.readLine().split(",");
 
            assertEquals(lineOne[1], "S1");
+           br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -94,6 +98,7 @@ public class PeerEvalTest
            String[] lineOne = br.readLine().split(",");
 
            assertEquals(lineOne[2], "S2");
+           br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -113,6 +118,7 @@ public class PeerEvalTest
            String[] lineOne = br.readLine().split(",");
 
            assertEquals(lineOne[3], "Question");
+           br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -132,6 +138,7 @@ public class PeerEvalTest
            String[] lineOne = br.readLine().split(",");
 
            assertEquals(lineOne[4], "Value");
+           br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -152,6 +159,8 @@ public class PeerEvalTest
            assert(br.readLine().split(",")[2].getClass().getSimpleName().equals("String"));
            assert(br.readLine().split(",")[3].getClass().getSimpleName().equals("String"));
            assert(br.readLine().split(",")[4].getClass().getSimpleName().equals("String"));
+
+           br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -169,6 +178,7 @@ public class PeerEvalTest
         try{  
            br.readLine();
            assertEquals(br.readLine().split(",")[0], "1");
+           br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -186,6 +196,7 @@ public class PeerEvalTest
         try{  
            br.readLine();
            assertEquals(br.readLine().split(",")[1], "77");
+           br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
