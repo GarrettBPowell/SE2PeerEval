@@ -59,4 +59,13 @@ public class PeerEval
             e.printStackTrace();
         }
     }
+
+    public BufferedReader getBuffer(InputStream is)
+    {
+        InputStreamReader isr = new InputStreamReader(is); 
+        BufferedReader br = new BufferedReader(isr);
+        
+            return br;
+    }
+
 }
