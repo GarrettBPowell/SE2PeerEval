@@ -1,4 +1,5 @@
 package peerEval;
+import java.io.*;  
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,12 +10,20 @@ import org.junit.Test;
  */
 public class PeerEvalTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
+
+    
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+        PeerEval test = new PeerEval();
+
+        InputStream is = test.getFileAsIOStream("sampleCSV.csv");
+        test.printFileContent(is);
+        
+        is = test.getFileAsIOStream("sampleCSV.csv");
+        test.printFileContent(is);
+
     }
+     
+   
 }

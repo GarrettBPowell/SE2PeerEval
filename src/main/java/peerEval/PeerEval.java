@@ -1,6 +1,8 @@
 package peerEval;
-import java.io.*;  
-import java.util.Scanner; 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /***********************************
 *	Authors: Christa Greenwood, Garrett Powell, Megan Skeen
@@ -22,42 +24,37 @@ public class PeerEval
 {
     public static String filePath;
 
-    public void main( String[] args ) throws Exception
+    public static void main(final String[] args) throws IOException 
     {
         
-        filePath = "sampleCSV.csv";
-        System.out.println(this.getClass().getResource(filePath));
-        //readCSV();
- 
-        /*
-        // Parses CSV file
-        Scanner csv = new Scanner(new File(filePath));  
-        csv.useDelimiter(",");
-        
-        // Displays data from CSV file
-        while (csv.hasNext())
-        {  
-        System.out.print(csv.next() + " ");
-        }   
-        // Closes scanner
-        csv.close();
-
-        */
     }
-   
-    /*
-    public static void readCSV()
-    {
-         //Parses CSV file
-         Scanner csv = new Scanner(new File(this.getClass().getResource(filePath)));  
-         csv.useDelimiter(",");
 
-         //Displays data from CSV file
-         while (csv.hasNext())
-         {  
-         System.out.print(csv.next() + " ");
-         }   
-         //Closes scanner
-         csv.close();
-    }*/
+    public InputStream getFileAsIOStream(final String fileName) 
+    {
+        InputStream ioStream = this.getClass()
+            .getClassLoader()
+            .getResourceAsStream(fileName);
+        
+        if (ioStream == null) {
+            throw new IllegalArgumentException(fileName + " is not found");
+        }
+        return ioStream;
+    }
+
+    public void printFileContent(InputStream is)
+    {
+        try (InputStreamReader isr = new InputStreamReader(is); 
+                BufferedReader br = new BufferedReader(isr);) 
+        {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+            is.close();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
