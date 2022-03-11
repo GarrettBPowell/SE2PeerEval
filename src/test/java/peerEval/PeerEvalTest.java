@@ -1,9 +1,13 @@
 package peerEval;
-import java.io.*;  
-
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
+import org.junit.*;
 
-import org.junit.Test;
+import java.io.File; 
+import java.io.IOException;
+import java.util.*;
+import java.io.*;
 
 /**
  * Unit test for simple App.
@@ -11,11 +15,15 @@ import org.junit.Test;
 public class PeerEvalTest 
 {
     @Test
-    public void shouldAnswerWithTrue()
+    public void ReadCSV()
     {
         PeerEval test = new PeerEval();
-
         InputStream is = test.loadFile("sampleCSV.csv");
-        test.printFile(is);
+        try{  
+            assertNotEquals(is, null);
+                }
+        catch(Exception e){
+            System.out.println("Read CSV failed");
+        }
     }
 }
