@@ -13,13 +13,13 @@ Megan Skeen - Documenter
 Garrett Powell - Tester
 
 Glossary:
-Evaluation
+- Evaluation
  - An Evaluation is a set of answers returned based off of the survey presented. 
-Survey 
+- Survey 
  - A Survey is a set of questions presented to a team member. 
-Rating 
+- Rating 
  - A rating a numerical value assigned as the answer to a question in the survey. 
-Team 
+- Team 
  - A team is a group of team members that fill out surveys about each other. 
 Team Member 
  - A team member is an individual on a team. 
