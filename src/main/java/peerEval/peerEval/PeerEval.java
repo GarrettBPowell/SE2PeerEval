@@ -3,6 +3,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /***********************************
 *	Authors: Christa Greenwood, Garrett Powell, Megan Skeen
@@ -23,10 +26,27 @@ import java.io.InputStreamReader;
 public class PeerEval
 {
     public static String filePath;
+    static String url = "jdbc:postgresql://localhost/CS375v1";
+    static String user = "mrblee";
+    static String password = "purplewhite";
 
     public static void main(final String[] args) throws IOException 
     {
-        
+        connect();
+    }
+
+
+    public static Connection connect() 
+    {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to the PostgreSQL server successfully.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return conn;
     }
 
     public InputStream loadFile(final String fileName) 

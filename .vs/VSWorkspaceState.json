@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Documentation"
+    "\\Documentation",
+    "\\Documentation\\SequenceDiagrams",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\peerEval",
+    "\\src\\main\\resources",
+    "\\src\\test",
+    "\\src\\test\\java",
+    "\\src\\test\\java\\peerEval"
   ],
   "PreviewInSolutionExplorer": false
 }
