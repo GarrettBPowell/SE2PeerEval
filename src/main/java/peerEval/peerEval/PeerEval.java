@@ -26,19 +26,20 @@ import java.sql.SQLException;
 public class PeerEval
 {
     public static String filePath;
-    static String url = "jdbc:postgresql://localhost/CS375v1";
-    static String user = "mrblee";
-    static String password = "purplewhite";
+    private static String url = "jdbc:postgresql://localhost/SE375v1";
+    private static String user = "mrblee";
+    private static String password = "purplewhite";
 
     public static void main(final String[] args) throws IOException 
     {
-        connect();
+        PeerEval peer = new PeerEval();
+        peer.connect();   
     }
 
+    public static Connection connect() {
 
-    public static Connection connect() 
-    {
         Connection conn = null;
+
         try {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connected to the PostgreSQL server successfully.");
