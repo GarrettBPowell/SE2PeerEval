@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 /***********************************
 *	Authors: Christa Greenwood, Garrett Powell, Megan Skeen
@@ -26,29 +29,37 @@ import java.sql.SQLException;
 public class PeerEval
 {
     public static String filePath;
-    private static String url = "jdbc:postgresql://localhost/SE375v1";
+    private static String url = "jdbc:postgresql://localhost:5432/SE375v1";
     private static String user = "mrblee";
     private static String password = "purplewhite";
 
     public static void main(final String[] args) throws IOException 
     {
-        PeerEval peer = new PeerEval();
-        peer.connect();   
-    }
-
-    public static Connection connect() {
-
-        Connection conn = null;
-
+        Connection c = null;
         try {
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the PostgreSQL server successfully.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
 
-        return conn;
+            Class.forName("org.postgresql.Driver");
+
+                 c = DriverManager
+
+                 .getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+
+                 "mrblee", "purplewhite");
+
+                 } catch (Exception e) {
+
+                 e.printStackTrace();
+
+                 System.err.println(e.getClass().getName()+": "+e.getMessage());
+
+                 System.exit(0);
+
+            }
     }
+
+   // public static Connection connect() {
+    //    return
+    //}
 
     public InputStream loadFile(final String fileName) 
     {
