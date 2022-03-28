@@ -26,6 +26,7 @@ import java.sql.ResultSet;
 *		mvn test
 *
 ************************************/
+
 public class PeerEval
 {
     public static String filePath;
@@ -37,24 +38,14 @@ public class PeerEval
     {
         Connection c = null;
         try {
-
             Class.forName("org.postgresql.Driver");
-
-                 c = DriverManager
-
-                 .getConnection("jdbc:postgresql://localhost:5432/cs375v1",
-
-                 "mrblee", "purplewhite");
-
-                 } catch (Exception e) {
-
-                 e.printStackTrace();
-
-                 System.err.println(e.getClass().getName()+": "+e.getMessage());
-
-                 System.exit(0);
-
-            }
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1","mrblee", "purplewhite");
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
+        }
     }
 
    // public static Connection connect() {

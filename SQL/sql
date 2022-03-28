@@ -22,3 +22,27 @@ insert into category(id, text, category_type) values
 
 -- Displays all categories in the category table
 select * from category;
+
+-- Creates category table
+drop table if exists response;
+CREATE TABLE response (
+id int primary key,
+s1 int,
+s2 int,
+question char(3),
+rValue int
+);
+
+-- Inserts categories into category table
+insert into response(id, s1, s2, question, rValue) values
+(1, 77, 88, 'C', 3),
+(2, 88, 77, 'H', 4),
+(3, 99, 77, 'K', 1);
+
+
+-- Displays all responses in the response table
+select * from response;
+
+CREATE VIEW v_response AS
+SELECT id as evalid, s1 as student1, s2 as student2, question as category, rValue as value
+FROM response;

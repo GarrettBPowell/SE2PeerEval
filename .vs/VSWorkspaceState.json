@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\lib",
     "\\src\\main",
     "\\src\\main\\java",
     "\\src\\main\\java\\peerEval",
     "\\src\\main\\java\\peerEval\\peerEval",
+    "\\src\\main\\resources",
     "\\src\\test",
-    "\\src\\test\\java",
-    "\\target",
-    "\\target\\generated-test-sources"
+    "\\src\\test\\java"
   ],
+  "SelectedNode": "\\pom.xml",
   "PreviewInSolutionExplorer": false
 }

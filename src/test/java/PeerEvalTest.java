@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.*;
 import java.io.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  * Unit test for simple App.
  */
