@@ -19,6 +19,69 @@ import java.sql.ResultSet;
  */
 public class PeerEvalTest 
 {
+    public static PeerEval pc;
+    public static Connection c;
+
+    @BeforeClass
+    public static void setUpDB() throws Exception {
+	//	System.out.println("connecting...");
+	pc = new PeerEval();
+	c = pc.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+    }
+
+    public void response_delete() {
+	pc.nonquery("delete from response");
+    }
+    
+    public void response_inserts() {
+	pc.nonquery("insert into response (evalid, student1, student2, category, value) values " +
+		    "(1,1,2,'C',5), (1,1,2,'H',4), (1,1,2,'I',3), (1,1,2,'K',2), (1,1,2,'E',1), (1,1,3,'C',1), (1,1,3,'H',2), (1,1,3,'I',3), (1,1,3,'K',4), (1,1,3,'E',5)"
+		    );
+	
+    }
+
+    
+    public int count_rows (String table) {
+	ResultSet rs;
+	int n = -1;
+	try {
+	    rs = pc.query("select count(*) as n from " + table);
+	} catch (Exception e) {
+	    System.out.println("ERROR select count(*) as n: " + e.getMessage());
+	    assertTrue(false);
+	    return -1;
+	}
+	try {
+	    rs.next();
+	    n = rs.getInt("n");
+	} catch (Exception e) {
+	    System.out.println("ERROR rs.next() and getInt()");
+	    assertTrue(false);
+	    return -1;
+	}
+	return n;
+    }
+
+
+
+    @Test
+    public void check_delete () {
+	int n = -1;
+	response_delete();
+	n = count_rows("response");
+	assertEquals("response table should be empty", 0, n);
+    }
+
+    
+    @Test
+    public void check_inserts () {
+	int n = -1;
+	response_delete();
+
+	response_inserts();
+	n = count_rows("response");
+	assertEquals("should now be 10", 10, n);
+    }
 
     //this tests the the input steam opens with given file name
     @Test
@@ -33,7 +96,9 @@ public class PeerEvalTest
         catch(Exception e){
             System.out.println("Read CSV failed");
         }
-    }
+    }  
+
+    
 
     //this tests that the buffered reader can be created with the given file name
     @Test

@@ -33,24 +33,28 @@ public class PeerEval
     private static String url = "jdbc:postgresql://localhost:5432/SE375v1";
     private static String user = "mrblee";
     private static String password = "purplewhite";
+    public static Connection c;
 
     public static void main(final String[] args) throws IOException 
     {
-        Connection c = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1","mrblee", "purplewhite");
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
-        }
+        PeerEval pe = new PeerEval();
+        c = null;
+        c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
     }
 
-   // public static Connection connect() {
-    //    return
-    //}
+    public static Connection connect(String url, String userN, String pass) {
+
+        try {
+                Class.forName("org.postgresql.Driver");
+                c = DriverManager.getConnection(url, userN, pass);
+            } 
+            catch (Exception e) {
+                e.printStackTrace();
+                System.err.println(e.getClass().getName()+": "+e.getMessage());
+                System.exit(0);
+            }
+        return c;
+    }
 
     public InputStream loadFile(final String fileName) 
     {
@@ -89,6 +93,50 @@ public class PeerEval
         BufferedReader br = new BufferedReader(isr);
         
             return br;
+    }
+
+    public ResultSet query(String inQuery) throws Exception {
+	    //	System.out.println("query: [" + inQuery + "]");
+	    ResultSet rs = null;
+
+	    PreparedStatement pstmt = c.prepareStatement(inQuery);
+	    rs = pstmt.executeQuery();
+
+	    return rs;
+    }
+
+
+    public void nonquery(String inQuery)  {
+	//	System.out.println("nonquery: [" + inQuery + "]");
+	ResultSet rs;
+	    try {
+	        PreparedStatement pstmt = c.prepareStatement(inQuery);
+	        rs = pstmt.executeQuery();
+	    }  catch(Exception e) {
+	        if (! ("No results were returned by the query.".equals(e.getMessage()))) {
+		    System.out.println("ERROR response delete");
+		    System.out.println(e.getMessage());
+	        }
+	    }
+    }
+
+    public void v_response_print(ResultSet rs) {
+	System.out.println("evalid\tstudent1\tstudent2\tcategory\tvalue");
+	    try {
+	        while(rs.next()) {
+		    System.out.print(rs.getInt(1));
+		    System.out.print("\t");
+		    System.out.print(rs.getInt(2));
+		    System.out.print("\t\t");
+		    System.out.print(rs.getInt(3));
+		    System.out.print("\t\t"+ rs.getString(4));
+		    System.out.print("\t\t");
+		    System.out.println(rs.getInt(5));
+	        } }
+	    catch(Exception exec) {
+	        System.out.println("v_response_print not happy");
+	        exec.printStackTrace();
+	    }
     }
 
 }

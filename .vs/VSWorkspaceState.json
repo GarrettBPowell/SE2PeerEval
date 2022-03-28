@@ -7,10 +7,10 @@
     "\\src\\main\\java",
     "\\src\\main\\java\\peerEval",
     "\\src\\main\\java\\peerEval\\peerEval",
-    "\\src\\main\\resources",
-    "\\src\\test",
-    "\\src\\test\\java"
+    "\\target",
+    "\\target\\test-classes",
+    "\\target\\test-classes\\peerEval"
   ],
-  "SelectedNode": "\\pom.xml",
+  "SelectedNode": "\\src\\main\\java\\peerEval\\peerEval\\PeerEval.java",
   "PreviewInSolutionExplorer": false
 }
