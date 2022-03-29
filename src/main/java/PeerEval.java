@@ -17,10 +17,13 @@ import java.sql.ResultSet;
 *
 *
 *	How to compile/build:
+*       make sure y ou are cd into SE2PeerEval file 
 *		mvn compile
 *	
 *	How to run/execute:
-*		java -cp target\classes peerEval.PeerEval
+*       make sure you are cd all the way into java file
+*       javac -cp ".:postgresql-42.3.3.jar"" PeerEval.java
+*		java -cp postgresql-42.3.3.jar PeerEval.java
 *
 *	How to test:
 *		mvn test
@@ -37,6 +40,7 @@ public class PeerEval
 
     public static void main(final String[] args) throws IOException 
     {
+        System.out.println("Ran");
         PeerEval pe = new PeerEval();
         c = null;
         c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");

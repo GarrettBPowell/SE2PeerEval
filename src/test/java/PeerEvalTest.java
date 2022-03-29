@@ -72,7 +72,7 @@ public class PeerEvalTest
 	assertEquals("response table should be empty", 0, n);
     }
 
-    
+    /*
     @Test
     public void check_inserts () {
 	int n = -1;
@@ -81,7 +81,7 @@ public class PeerEvalTest
 	response_inserts();
 	n = count_rows("response");
 	assertEquals("should now be 10", 10, n);
-    }
+    }*/
 
     //this tests the the input steam opens with given file name
     @Test
