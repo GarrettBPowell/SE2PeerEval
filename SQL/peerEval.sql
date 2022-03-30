@@ -22,3 +22,70 @@ insert into category(id, text, category_type) values
 
 -- Displays all categories in the category table
 select * from category;
+
+-- Creates response table
+drop table if exists response;
+CREATE TABLE response (
+evalid int,
+student1 int,
+student2 int,
+category char(3),
+value int
+);
+
+-- Inserts responses into response table
+insert into response(evalid, student1, student2, category, value) values
+(1,1,2,'C',5),
+(1,1,2,'H',4),
+(1,1,2,'I',3),
+(1,1,2,'K',2),
+(1,1,2,'E',1),
+(1,1,3,'C',1),
+(1,1,3,'H',2),
+(1,1,3,'I',3),
+(1,1,3,'K',4),
+(1,1,3,'E',5);
+
+
+-- Displays all responses in the response table
+select * from response;
+
+
+
+-- Creates team table
+drop table if exists team;
+CREATE TABLE team (
+evalid int,
+teamid int,
+student int
+);
+
+-- Inserts categories into response table
+insert into team(evalid, teamid, student) values
+(1,1,1),
+(1,1,2),
+(1,1,3),
+(1,2,4),
+(1,2,5),
+(1,2,6),
+(1,3,7),
+(1,3,8),
+(1,3,9),
+(2,1,2),
+(2,1,3),
+(2,1,4),
+(2,2,5),
+(2,2,6),
+(2,2,7),
+(2,3,8),
+(2,3,9),
+(2,3,10);
+
+
+-- Displays all teams in the team table
+select * from team;
+
+
+CREATE VIEW v_response AS
+SELECT evalid as evalid, student1 as student1, student2 as student2, category as category, value as value
+FROM response;
