@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Documentation"
+    "\\src",
+    "\\src\\lib",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\peerEval",
+    "\\src\\main\\java\\peerEval\\peerEval",
+    "\\target",
+    "\\target\\test-classes",
+    "\\target\\test-classes\\peerEval"
   ],
+  "SelectedNode": "\\src\\main\\java\\peerEval\\peerEval\\postgresql-42.3.3.jar",
   "PreviewInSolutionExplorer": false
 }
