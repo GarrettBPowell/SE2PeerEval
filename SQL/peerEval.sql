@@ -89,3 +89,7 @@ select * from team;
 CREATE VIEW v_response AS
 SELECT evalid as evalid, student1 as student1, student2 as student2, category as category, value as value
 FROM response;
+
+CREATE VIEW v_teams AS 
+SELECT evalid as evalid, team as team, student as student
+FROM team;
