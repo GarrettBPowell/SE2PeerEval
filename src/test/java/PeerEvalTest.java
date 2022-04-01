@@ -1,4 +1,3 @@
-package peerEval;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotEquals;
@@ -85,8 +84,24 @@ public class PeerEvalTest
 	return n;
     }
 
+    @Test
+    public void loadDataTest() {
+        String fileName = "response";
+        String tableName = "response";
+        pc.loadData(fileName, tableName);
 
-
+        int n = -1;
+        n = count_rows_con("response", "where evalid = '1'");
+         try{  
+                  assertEquals(n, 10);
+                }
+        catch(Exception e){
+            System.out.println("loadDataTest Response fail");
+        }
+ 
+        response_delete();
+    }
+    
     @Test
     public void check_delete_con () {
 	int n = -1;

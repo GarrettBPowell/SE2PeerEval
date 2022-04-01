@@ -1,4 +1,3 @@
-package peerEval;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +7,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.io.File; 
+import java.util.*;
+import java.util.Scanner;
+import java.io.*;
+
 
 
 /***********************************
@@ -40,10 +45,37 @@ public class PeerEval
 
     public static void main(final String[] args) throws IOException 
     {
-        System.out.println("Ran");
+    }
+
+    public static void loadData(String fileName, String tableName)
+    {
         PeerEval pe = new PeerEval();
         c = null;
         c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+
+
+        InputStream is = pe.loadFile("response.csv");
+        BufferedReader br = pe.getBuffer(is);
+
+        String columnNames = "";
+        try{
+            columnNames = br.readLine();
+            
+
+            String query = "insert into " + tableName + "(" + columnNames + ") values";
+            String line = "";
+            while((line = br.readLine()) != null)
+            {
+                query = query + " (" + line + "),";
+            }
+
+            query = query.substring(0, query.length() -1);
+            System.out.println(query);
+             pe.nonquery(query);
+        } 
+        catch(Exception e){
+            System.out.println("load data failed");
+        }
     }
 
     public static Connection connect(String url, String userN, String pass) {
