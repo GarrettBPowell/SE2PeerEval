@@ -100,13 +100,32 @@ public class PeerEvalTest
     }
 
     @Test
-    public void loadDataTestTeam() {
+    public void loadDataTestTeam1() {
         String fileName = "teams";
         String tableName = "team";
         pc.loadData(fileName, tableName);
 
         int n = -1;
         n = count_rows_con(tableName, "where evalid = '1'");
+         try{  
+                  assertEquals(n, 4);
+                }
+        catch(Exception e){
+            System.out.println("loadDataTest Response fail");
+        }
+ 
+        delete_con(tableName, "where evalid = '1'");
+        delete_con(tableName, "where evalid = '2'");
+    }
+
+    @Test
+    public void loadDataTestTeam2() {
+        String fileName = "teams";
+        String tableName = "team";
+        pc.loadData(fileName, tableName);
+
+        int n = -1;
+        n = count_rows_con(tableName, "where evalid = '2'");
          try{  
                   assertEquals(n, 4);
                 }

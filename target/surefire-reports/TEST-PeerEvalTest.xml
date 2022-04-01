@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="PeerEvalTest" time="0.716" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="PeerEvalTest" time="0.762" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.8.0_311\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\garet\AppData\Local\Temp\surefire806875870183721643\surefirebooter8185844129108021696.jar C:\Users\garet\AppData\Local\Temp\surefire806875870183721643 2022-03-31T21-36-20_396-jvmRun1 surefire340137456572453325tmp surefire_0992902820217319047tmp"/>
+    <property name="sun.java.command" value="C:\Users\garet\AppData\Local\Temp\surefire3870306201466005780\surefirebooter1837812298479112460.jar C:\Users\garet\AppData\Local\Temp\surefire3870306201466005780 2022-03-31T21-37-07_350-jvmRun1 surefire6857074605942134340tmp surefire_0874551444984149858tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\garet\source\repos\SE2PeerEval\target\test-classes;C:\Users\garet\source\repos\SE2PeerEval\target\classes;C:\Users\garet\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\garet\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\garet\.m2\repository\org\postgresql\postgresql\42.3.3\postgresql-42.3.3.jar;C:\Users\garet\.m2\repository\org\checkerframework\checker-qual\3.5.0\checker-qual-3.5.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\garet"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\garet\AppData\Local\Temp\surefire806875870183721643\surefirebooter8185844129108021696.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\garet\AppData\Local\Temp\surefire3870306201466005780\surefirebooter1837812298479112460.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files (x86)\Java\jdk1.8.0_311\jre\lib\resources.jar;C:\Program Files (x86)\Java\jdk1.8.0_311\jre\lib\rt.jar;C:\Program Files (x86)\Java\jdk1.8.0_311\jre\lib\sunrsasign.jar;C:\Program Files (x86)\Java\jdk1.8.0_311\jre\lib\jsse.jar;C:\Program Files (x86)\Java\jdk1.8.0_311\jre\lib\jce.jar;C:\Program Files (x86)\Java\jdk1.8.0_311\jre\lib\charsets.jar;C:\Program Files (x86)\Java\jdk1.8.0_311\jre\lib\jfr.jar;C:\Program Files (x86)\Java\jdk1.8.0_311\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
@@ -60,13 +60,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="check_inserts" classname="PeerEvalTest" time="0.026"/>
+  <testcase name="check_inserts" classname="PeerEvalTest" time="0.022"/>
+  <testcase name="loadDataTestTeam1" classname="PeerEvalTest" time="0.038"/>
+  <testcase name="loadDataTestTeam2" classname="PeerEvalTest" time="0.038"/>
   <testcase name="ReadCSV" classname="PeerEvalTest" time="0"/>
   <testcase name="getStrings" classname="PeerEvalTest" time="0.001"/>
-  <testcase name="loadDataTestRes" classname="PeerEvalTest" time="0.045"/>
-  <testcase name="loadDataTestTeam" classname="PeerEvalTest" time="0.043"/>
+  <testcase name="loadDataTestRes" classname="PeerEvalTest" time="0.038"/>
   <testcase name="check_delete_con" classname="PeerEvalTest" time="0.001"/>
-  <testcase name="getInt1" classname="PeerEvalTest" time="0"/>
-  <testcase name="getInt2" classname="PeerEvalTest" time="0.001"/>
+  <testcase name="getInt1" classname="PeerEvalTest" time="0.001"/>
+  <testcase name="getInt2" classname="PeerEvalTest" time="0"/>
   <testcase name="getBR" classname="PeerEvalTest" time="0"/>
 </testsuite>
