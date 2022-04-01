@@ -81,6 +81,7 @@ public class PeerEvalTest
 	return n;
     }
 
+    //tests loading in the given file into the given table name
     @Test
     public void loadDataTestRes() {
         String fileName = "response";
@@ -99,6 +100,7 @@ public class PeerEvalTest
         delete_con(tableName, "where evalid = '1'");
     }
 
+    //tests loading in teams csv into teams table and checking count of values of evalid = 1 
     @Test
     public void loadDataTestTeam1() {
         String fileName = "teams";
@@ -118,6 +120,7 @@ public class PeerEvalTest
         delete_con(tableName, "where evalid = '2'");
     }
 
+    //tests loading in teams csv into teams table and checking count of values of evalid = 2
     @Test
     public void loadDataTestTeam2() {
         String fileName = "teams";
@@ -137,6 +140,7 @@ public class PeerEvalTest
         delete_con(tableName, "where evalid = '2'");
     }
     
+    //checks deleting from tables conditionally
     @Test
     public void check_delete_con () {
 	int n = -1;
@@ -145,7 +149,7 @@ public class PeerEvalTest
 	assertEquals("response table where evalid = 10 should be empty", 0, n);
     }
 
-    
+    //checks inserting into response table
     @Test
     public void check_inserts () {
 	int n = -1;
@@ -187,20 +191,20 @@ public class PeerEvalTest
         }
     }
 
-    /*
+    
     //confirm first value in file is eval number column name
     @Test
     public void ReadWordOne()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
         //get first line and turn into an array
            String[] lineOne = br.readLine().split(",");
 
-           assertEquals(lineOne[0], "Eval");
+           assertEquals(lineOne[0], "evalid");
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -212,14 +216,14 @@ public class PeerEvalTest
     public void ReadWordTwo()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
         //get first line and turn into an array
            String[] lineOne = br.readLine().split(",");
 
-           assertEquals(lineOne[1], "S1");
+           assertEquals(lineOne[1], "student1");
            br.close();
                 }
         catch(Exception e){
@@ -232,14 +236,14 @@ public class PeerEvalTest
     public void ReadWordThree()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
         //get first line and turn into an array
            String[] lineOne = br.readLine().split(",");
 
-           assertEquals(lineOne[2], "S2");
+           assertEquals(lineOne[2], "student2");
            br.close();
                 }
         catch(Exception e){
@@ -252,14 +256,14 @@ public class PeerEvalTest
     public void ReadWordFour()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
         //get first line and turn into an array
            String[] lineOne = br.readLine().split(",");
 
-           assertEquals(lineOne[3], "Question");
+           assertEquals(lineOne[3], "category");
            br.close();
                 }
         catch(Exception e){
@@ -272,20 +276,20 @@ public class PeerEvalTest
     public void ReadWordFive()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
         //get first line and turn into an array
            String[] lineOne = br.readLine().split(",");
 
-           assertEquals(lineOne[4], "Value");
+           assertEquals(lineOne[4], "value");
            br.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
         }
-    }*/
+    }
 
     //confirm values out of column names are strings
     @Test
