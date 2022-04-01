@@ -32,12 +32,14 @@ public class PeerEvalTest
     public void response_delete() {
 	pc.nonquery("delete from response");
     }
+    public void response_delete_con(String table, String where) {
+	pc.nonquery("delete from " + table + " " + where);
+    }
     
     public void response_inserts() {
 	pc.nonquery("insert into response (evalid, student1, student2, category, value) values " +
-		    "(1,1,2,'C',5), (1,1,2,'H',4), (1,1,2,'I',3), (1,1,2,'K',2), (1,1,2,'E',1), (1,1,3,'C',1), (1,1,3,'H',2), (1,1,3,'I',3), (1,1,3,'K',4), (1,1,3,'E',5)"
-		    );
-	
+		    "(10,1,2,'C',5), (10,1,2,'H',4), (10,1,2,'I',3), (10,1,2,'K',2), (10,1,2,'E',1), (10,1,3,'C',1), (10,1,3,'H',2), (10,1,3,'I',3), (10,1,3,'K',4), (10,1,3,'E',5)"
+		    );	
     }
 
     
@@ -62,25 +64,45 @@ public class PeerEvalTest
 	return n;
     }
 
+    public int count_rows_con (String table, String where) {
+	ResultSet rs;
+	int n = -1;
+	try {
+	    rs = pc.query("select count(*) as n from " + table + " " + where);
+	} catch (Exception e) {
+	    System.out.println("ERROR select count(*) as n: " + e.getMessage());
+	    assertTrue(false);
+	    return -1;
+	}
+	try {
+	    rs.next();
+	    n = rs.getInt("n");
+	} catch (Exception e) {
+	    System.out.println("ERROR rs.next() and getInt()");
+	    assertTrue(false);
+	    return -1;
+	}
+	return n;
+    }
+
 
 
     @Test
-    public void check_delete () {
+    public void check_delete_con () {
 	int n = -1;
-	response_delete();
-	n = count_rows("response");
-	assertEquals("response table should be empty", 0, n);
+	response_delete_con("response", "where evalid = '10'");
+	n = count_rows_con("response", "where evalid = '10'");
+	assertEquals("response table where evalid = 10 should be empty", 0, n);
     }
 
     
     @Test
     public void check_inserts () {
 	int n = -1;
-	response_delete();
 
 	response_inserts();
-	n = count_rows("response");
-	assertEquals("should now be 10", 10, n);
+	n = count_rows_con("response", "where evalid = '10'");
+	assertTrue(n == 10);
     }
 
     //this tests the the input steam opens with given file name
@@ -88,7 +110,7 @@ public class PeerEvalTest
     public void ReadCSV()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
 
         try{  
             assertNotEquals(is, null);
@@ -105,7 +127,7 @@ public class PeerEvalTest
     public void getBR()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
 
         try{  
             assertNotEquals(test.getBuffer(is), null);
@@ -220,7 +242,7 @@ public class PeerEvalTest
     public void getStrings()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
@@ -242,7 +264,7 @@ public class PeerEvalTest
     public void getInt1()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
@@ -260,7 +282,7 @@ public class PeerEvalTest
     public void getInt2()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("sampleCSV.csv");
+        InputStream is = test.loadFile("response.csv");
         BufferedReader br = test.getBuffer(is);
 
         try{  
