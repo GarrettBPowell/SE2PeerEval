@@ -291,6 +291,64 @@ public class PeerEvalTest
         }
     }
 
+        //confirm first value in file is eval number column name
+    @Test
+    public void ReadWordOneTeam()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("teams.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+        //get first line and turn into an array
+           String[] lineOne = br.readLine().split(",");
+
+           assertEquals(lineOne[0], "evalid");
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm second value in file is S1 column name
+    @Test
+    public void ReadWordTwoTeam()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("teams.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+        //get first line and turn into an array
+           String[] lineOne = br.readLine().split(",");
+
+           assertEquals(lineOne[1], "teamid");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm 3rd value in file is S2 column name
+    @Test
+    public void ReadWordThreeTeam()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("teams.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+        //get first line and turn into an array
+           String[] lineOne = br.readLine().split(",");
+
+           assertEquals(lineOne[2], "student");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
     //confirm values out of column names are strings
     @Test
     public void getStrings()
