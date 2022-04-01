@@ -409,7 +409,7 @@ public class PeerEvalTest
         }
     }
 
-    //confirm first value second column is 77
+    //confirm first value second column is 1
     @Test
     public void getInt2()
     {
@@ -426,5 +426,257 @@ public class PeerEvalTest
             System.out.println("Read line failed");
         }
     }
+
+    //--------------------------------------------------------------
+
+    //confirm first value third column is 2
+    @Test
+    public void getInt3()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           assertEquals(br.readLine().split(",")[2], "2");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm first value fourth column is 'C'
+    @Test
+    public void getChar1()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           assertEquals(br.readLine().split(",")[3], "'C'");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm first value fifth column is 5
+    @Test
+    public void getInt4()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           assertEquals(br.readLine().split(",")[4], "5");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm second value in table is 1
+    @Test
+    public void getInt5()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[0], "1");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm second value second column is 1
+    @Test
+    public void getInt6()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[1], "1");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm second value third column is 2
+    @Test
+    public void getInt7()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[2], "2");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm second value fourth column is 'H'
+    @Test
+    public void getChar2()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[3], "'H'");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm second value fifth column is 4
+    @Test
+    public void getInt8()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[4], "4");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm third value in table is 1
+    @Test
+    public void getInt9()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[0], "1");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm third value second column is 1
+    @Test
+    public void getInt10()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[1], "1");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm third value third column is 2
+    @Test
+    public void getInt11()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[2], "2");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm third value fourth column is 'I'
+    @Test
+    public void getChar3()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[3], "'I'");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm third value fifth column is 3
+    @Test
+    public void getInt12()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("response.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           br.readLine();
+           br.readLine();
+           br.readLine();
+           assertEquals(br.readLine().split(",")[4], "3");
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
 
 }
