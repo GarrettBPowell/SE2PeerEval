@@ -1,4 +1,4 @@
-evalid,team,student
+evalid,teamid,student
 1, 1, 1
 1, 1, 2 
 1, 2, 3
@@ -6,4 +6,4 @@ evalid,team,student
 2, 1, 2
 2, 1, 4
 2, 2, 1
-2, 2, 3 
+2, 2, 3

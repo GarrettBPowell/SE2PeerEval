@@ -54,7 +54,7 @@ public class PeerEval
         c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
 
 
-        InputStream is = pe.loadFile("response.csv");
+        InputStream is = pe.loadFile(fileName + ".csv");
         BufferedReader br = pe.getBuffer(is);
 
         String columnNames = "";

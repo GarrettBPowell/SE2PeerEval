@@ -28,10 +28,7 @@ public class PeerEvalTest
 	c = pc.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
     }
 
-    public void response_delete() {
-	pc.nonquery("delete from response");
-    }
-    public void response_delete_con(String table, String where) {
+    public void delete_con(String table, String where) {
 	pc.nonquery("delete from " + table + " " + where);
     }
     
@@ -85,13 +82,13 @@ public class PeerEvalTest
     }
 
     @Test
-    public void loadDataTest() {
+    public void loadDataTestRes() {
         String fileName = "response";
         String tableName = "response";
         pc.loadData(fileName, tableName);
 
         int n = -1;
-        n = count_rows_con("response", "where evalid = '1'");
+        n = count_rows_con(tableName, "where evalid = '1'");
          try{  
                   assertEquals(n, 10);
                 }
@@ -99,13 +96,32 @@ public class PeerEvalTest
             System.out.println("loadDataTest Response fail");
         }
  
-        response_delete();
+        delete_con(tableName, "where evalid = '1'");
+    }
+
+    @Test
+    public void loadDataTestTeam() {
+        String fileName = "teams";
+        String tableName = "team";
+        pc.loadData(fileName, tableName);
+
+        int n = -1;
+        n = count_rows_con(tableName, "where evalid = '1'");
+         try{  
+                  assertEquals(n, 4);
+                }
+        catch(Exception e){
+            System.out.println("loadDataTest Response fail");
+        }
+ 
+        delete_con(tableName, "where evalid = '1'");
+        delete_con(tableName, "where evalid = '2'");
     }
     
     @Test
     public void check_delete_con () {
 	int n = -1;
-	response_delete_con("response", "where evalid = '10'");
+	delete_con("response", "where evalid = '10'");
 	n = count_rows_con("response", "where evalid = '10'");
 	assertEquals("response table where evalid = 10 should be empty", 0, n);
     }
