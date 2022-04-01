@@ -27,7 +27,7 @@ import java.io.*;
 *	
 *	How to run/execute:
 *       make sure you are cd all the way into java file
-*       javac -cp ".:postgresql-42.3.3.jar"" PeerEval.java
+*       javac -cp ".:postgresql-42.3.3.jar" PeerEval.java
 *		java -cp postgresql-42.3.3.jar PeerEval.java
 *
 *	How to test:

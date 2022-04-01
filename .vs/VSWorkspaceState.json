@@ -1,11 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\SQL",
     "\\src",
     "\\src\\main",
     "\\src\\main\\java",
-    "\\src\\main\\resources"
+    "\\src\\main\\resources",
+    "\\src\\test",
+    "\\src\\test\\java"
   ],
-  "SelectedNode": "\\src\\main\\resources\\sampleCSV.csv",
+  "SelectedNode": "\\pom.xml",
   "PreviewInSolutionExplorer": false
 }
