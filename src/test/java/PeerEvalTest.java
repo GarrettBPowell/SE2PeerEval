@@ -351,7 +351,7 @@ public class PeerEvalTest
     }
     //confirm values out of column names are strings
     @Test
-    public void getStrings()
+    public void getStringsResponse()
     {
         PeerEval test = new PeerEval();
         InputStream is = test.loadFile("response.csv");
@@ -363,6 +363,26 @@ public class PeerEvalTest
            assert(br.readLine().split(",")[2].getClass().getSimpleName().equals("String"));
            assert(br.readLine().split(",")[3].getClass().getSimpleName().equals("String"));
            assert(br.readLine().split(",")[4].getClass().getSimpleName().equals("String"));
+
+           br.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+        
+    //confirm values out of column names are strings
+    @Test
+    public void getStringsTeams()
+    {
+        PeerEval test = new PeerEval();
+        InputStream is = test.loadFile("teams.csv");
+        BufferedReader br = test.getBuffer(is);
+
+        try{  
+           assert(br.readLine().split(",")[0].getClass().getSimpleName().equals("String"));
+           assert(br.readLine().split(",")[1].getClass().getSimpleName().equals("String"));
+           assert(br.readLine().split(",")[2].getClass().getSimpleName().equals("String"));
 
            br.close();
                 }
