@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: PeerEvalTest
 -------------------------------------------------------------------------------
-Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.217 s - in PeerEvalTest
+Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.191 s - in PeerEvalTest

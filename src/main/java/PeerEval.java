@@ -45,7 +45,8 @@ public class PeerEval
 
     public static void main(final String[] args) throws IOException 
     {
-    }
+        loadData("response", "src/main/resources/response");
+        }
 
     public static void loadData(String fileName, String tableName)
     {
