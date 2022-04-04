@@ -1,14 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\SQL",
-    "\\src",
     "\\src\\main",
     "\\src\\main\\java",
     "\\src\\main\\resources",
     "\\src\\test",
     "\\src\\test\\java"
   ],
-  "SelectedNode": "\\src\\main\\java\\response.csv",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
