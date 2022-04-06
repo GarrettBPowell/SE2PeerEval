@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -55,17 +57,16 @@ public class PeerEval
         c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
 
 
-        InputStream is = pe.loadFile(fileName + ".csv");
-        BufferedReader br = pe.getBuffer(is);
+        Scanner s = pe.loadFile(fileName);
 
         String columnNames = "";
         try{
-            columnNames = br.readLine();
+            columnNames = s.next();
             
 
             String query = "insert into " + tableName + "(" + columnNames + ") values";
             String line = "";
-            while((line = br.readLine()) != null)
+            while((line = s.next()) != null)
             {
                 query = query + " (" + line + "),";
             }
@@ -93,43 +94,39 @@ public class PeerEval
         return c;
     }
 
-    public InputStream loadFile(final String fileName) 
+    public Scanner loadFile(final String fileName) 
     {
-        InputStream ioStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
-        
-        //catch if name is empty
-        if (ioStream == null) {
+        Scanner s;
+        try{
+            ClassLoader classLoader = getClass().getClassLoader();
+            File fullFile = new File("..\\..\\resources\\" + fileName + ".csv");
+            s = new Scanner(fullFile);
+        } catch (IOException e){
+            e.printStackTrace();
             throw new IllegalArgumentException(fileName + " is not found");
         }
-        return ioStream;
+        //this.getClass().getClassLoader().getResourceAsStream("..\\..\\resources\\" +fileName);
+        
+        return s;
     }
 
-    public void printFile(InputStream is)
+    public void printFile(Scanner s)
     {
-        try (InputStreamReader isr = new InputStreamReader(is); BufferedReader br = new BufferedReader(isr);) 
+        try 
         {
-            String line;
+            s.useDelimiter(", ");
 
-            while ((line = br.readLine()) != null) 
-            {
-                System.out.println(line);
+            while (s.hasNext()) {
+                System.out.print(s.next());
             }
 
-            //close the file
-            is.close();
+            s.close();
+            System.out.println("\n");
         }
-        catch(IOException e)
+        catch(Exception e)
         {
             e.printStackTrace();
         }
-    }
-
-    public BufferedReader getBuffer(InputStream is)
-    {
-        InputStreamReader isr = new InputStreamReader(is); 
-        BufferedReader br = new BufferedReader(isr);
-        
-            return br;
     }
 
     public ResultSet query(String inQuery) throws Exception {

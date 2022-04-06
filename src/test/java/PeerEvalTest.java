@@ -164,10 +164,10 @@ public class PeerEvalTest
     public void ReadCSV()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
+        Scanner s = test.loadFile("response");
 
         try{  
-            assertNotEquals(is, null);
+            assertNotEquals(s, null);
                 }
         catch(Exception e){
             System.out.println("Read CSV failed");
@@ -181,30 +181,30 @@ public class PeerEvalTest
     public void getBR()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
+        Scanner s = test.loadFile("response");
 
         try{  
-            assertNotEquals(test.getBuffer(is), null);
+            assertNotEquals(s, null);
                 }
         catch(Exception e){
-            System.out.println("Get Buffer failed");
+            System.out.println("Get Scanner failed");
         }
     }
 
-    
+    /*
     //confirm first value in file is eval number column name
     @Test
     public void ReadWordOne()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+           String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[0], "evalid");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -216,15 +216,15 @@ public class PeerEvalTest
     public void ReadWordTwo()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
+        
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+           String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[1], "student1");
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -236,15 +236,14 @@ public class PeerEvalTest
     public void ReadWordThree()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+        String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[2], "student2");
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -256,15 +255,14 @@ public class PeerEvalTest
     public void ReadWordFour()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");      
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+           String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[3], "category");
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -276,15 +274,14 @@ public class PeerEvalTest
     public void ReadWordFive()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+           String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[4], "value");
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -296,14 +293,14 @@ public class PeerEvalTest
     public void ReadWordOneTeam()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("teams.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("teams");
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+           String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[0], "evalid");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -315,15 +312,14 @@ public class PeerEvalTest
     public void ReadWordTwoTeam()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("teams.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("teams");
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+           String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[1], "teamid");
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -335,15 +331,14 @@ public class PeerEvalTest
     public void ReadWordThreeTeam()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("teams.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("team");
 
         try{  
         //get first line and turn into an array
-           String[] lineOne = br.readLine().split(",");
+           String[] lineOne = s.nextLine().split(",");
 
            assertEquals(lineOne[2], "student");
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -354,17 +349,16 @@ public class PeerEvalTest
     public void getStringsResponse()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           assert(br.readLine().split(",")[0].getClass().getSimpleName().equals("String"));
-           assert(br.readLine().split(",")[1].getClass().getSimpleName().equals("String"));
-           assert(br.readLine().split(",")[2].getClass().getSimpleName().equals("String"));
-           assert(br.readLine().split(",")[3].getClass().getSimpleName().equals("String"));
-           assert(br.readLine().split(",")[4].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[0].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[1].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[2].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[3].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[4].getClass().getSimpleName().equals("String"));
 
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -376,15 +370,14 @@ public class PeerEvalTest
     public void getStringsTeams()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("teams.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("teams");
 
         try{  
-           assert(br.readLine().split(",")[0].getClass().getSimpleName().equals("String"));
-           assert(br.readLine().split(",")[1].getClass().getSimpleName().equals("String"));
-           assert(br.readLine().split(",")[2].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[0].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[1].getClass().getSimpleName().equals("String"));
+           assert(s.nextLine().split(",")[2].getClass().getSimpleName().equals("String"));
 
-           br.close();
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -396,13 +389,12 @@ public class PeerEvalTest
     public void getInt1()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           assertEquals(br.readLine().split(",")[0], "1");
-           br.close();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[0], "1");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -414,13 +406,12 @@ public class PeerEvalTest
     public void getInt2()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           assertEquals(br.readLine().split(",")[1], "1");
-           br.close();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[1], "1");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -434,13 +425,12 @@ public class PeerEvalTest
     public void getInt3()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           assertEquals(br.readLine().split(",")[2], "2");
-           br.close();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[2], "2");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -452,13 +442,12 @@ public class PeerEvalTest
     public void getChar1()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           assertEquals(br.readLine().split(",")[3], "'C'");
-           br.close();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[3], "'C'");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -470,13 +459,12 @@ public class PeerEvalTest
     public void getInt4()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           assertEquals(br.readLine().split(",")[4], "5");
-           br.close();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[4], "5");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -488,14 +476,13 @@ public class PeerEvalTest
     public void getInt5()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[0], "1");
-           br.close();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[0], "1");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -507,14 +494,13 @@ public class PeerEvalTest
     public void getInt6()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[1], "1");
-           br.close();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[1], "1");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -526,14 +512,13 @@ public class PeerEvalTest
     public void getInt7()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[2], "2");
-           br.close();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[2], "2");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -545,14 +530,13 @@ public class PeerEvalTest
     public void getChar2()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[3], "'H'");
-           br.close();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[3], "'H'");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -564,14 +548,13 @@ public class PeerEvalTest
     public void getInt8()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[4], "4");
-           br.close();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[4], "4");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -583,15 +566,14 @@ public class PeerEvalTest
     public void getInt9()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[0], "1");
-           br.close();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            assertEquals(s.nextLine().split(",")[0], "1");
+            s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -603,15 +585,14 @@ public class PeerEvalTest
     public void getInt10()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[1], "1");
-           br.close();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[1], "1");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -623,15 +604,14 @@ public class PeerEvalTest
     public void getInt11()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[2], "2");
-           br.close();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[2], "2");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -643,15 +623,14 @@ public class PeerEvalTest
     public void getChar3()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[3], "'I'");
-           br.close();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[3], "'I'");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
@@ -663,20 +642,19 @@ public class PeerEvalTest
     public void getInt12()
     {
         PeerEval test = new PeerEval();
-        InputStream is = test.loadFile("response.csv");
-        BufferedReader br = test.getBuffer(is);
+        Scanner s = test.loadFile("response");
 
         try{  
-           br.readLine();
-           br.readLine();
-           br.readLine();
-           assertEquals(br.readLine().split(",")[4], "3");
-           br.close();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[4], "3");
+           s.close();
                 }
         catch(Exception e){
             System.out.println("Read line failed");
         }
     }
-
+    */
 
 }

@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\src",
     "\\src\\main",
     "\\src\\main\\java",
     "\\src\\main\\resources",
     "\\src\\test",
     "\\src\\test\\java"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\main\\java\\postgresql-42.3.3.jar",
   "PreviewInSolutionExplorer": false
 }
