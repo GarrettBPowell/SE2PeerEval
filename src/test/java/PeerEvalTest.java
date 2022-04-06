@@ -92,7 +92,7 @@ public class PeerEvalTest
 
         int n = -1;
         n = count_rows_con(tableName, "where evalid = '1'");
-                  assertEquals(n, 10);
+                  assertEquals(10, n);
                 }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
@@ -112,7 +112,7 @@ public class PeerEvalTest
 
                 int n = -1;
                 n = count_rows_con(tableName, "where evalid = '1'");
-                assertEquals(n, 4);
+                assertEquals(4, n);
         }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
@@ -133,7 +133,7 @@ public class PeerEvalTest
 
                 int n = -1;
                 n = count_rows_con(tableName, "where evalid = '2'");
-                assertEquals(n, 4);
+                assertEquals(4, n);
         }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
@@ -166,10 +166,11 @@ public class PeerEvalTest
     @Test
     public void ReadCSV()
     {
+
         try{  
             PeerEval test = new PeerEval();
             Scanner s = test.loadFile("response");
-            assertNotEquals(s, null);
+            assertNotEquals(s.next(), null);
                 }
         catch(Exception e){
             System.out.println("Read CSV failed");
@@ -194,7 +195,7 @@ public class PeerEvalTest
         }
     }
 
-    /*
+    
     //confirm first value in file is eval number column name
     @Test
     public void ReadWordOne()
@@ -234,6 +235,7 @@ public class PeerEvalTest
         }
     }
 
+    
     //confirm 3rd value in file is S2 column name
     @Test
     public void ReadWordThree()
@@ -334,7 +336,7 @@ public class PeerEvalTest
     public void ReadWordThreeTeam()
     {
         PeerEval test = new PeerEval();
-        Scanner s = test.loadFile("team");
+        Scanner s = test.loadFile("teams");
 
         try{  
         //get first line and turn into an array
@@ -658,6 +660,6 @@ public class PeerEvalTest
             System.out.println("Read line failed");
         }
     }
-    */
+    
 
 }

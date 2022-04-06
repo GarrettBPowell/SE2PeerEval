@@ -29,8 +29,9 @@ import java.io.*;
 *	
 *	How to run/execute:
 *       make sure you are cd all the way into java file
-*       javac -cp ".:postgresql-42.3.3.jar" PeerEval.java
-*		java -cp postgresql-42.3.3.jar PeerEval.java
+*       mvn test
+*		mvn install assembly:assembly
+*       java -cp target/java_postgres-1.0-SNAPSHOT-jar-with-dependencies.jar PeerEval
 *
 *	How to test:
 *		mvn test
@@ -47,33 +48,44 @@ public class PeerEval
 
     public static void main(final String[] args) throws IOException 
     {
-        loadData("response", "src/main/resources/response");
-        }
+        System.out.println("Hello");
+        loadData("response", "response");
+     }
 
     public static void loadData(String fileName, String tableName)
     {
         PeerEval pe = new PeerEval();
         c = null;
-        c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+        try{
+            Class.forName("org.postgresql.Driver");
+            c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+        } catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 
 
-        Scanner s = pe.loadFile(fileName);
+        Scanner s;
 
         String columnNames = "";
         try{
-            columnNames = s.next();
-            
+            s = pe.loadFile(fileName);
+
+            columnNames = s.nextLine();
+            //System.out.println(columnNames + "\n");
 
             String query = "insert into " + tableName + "(" + columnNames + ") values";
             String line = "";
-            while((line = s.next()) != null)
+            while(s.hasNextLine())
             {
+                line = s.nextLine();
+                //System.out.println(line);
                 query = query + " (" + line + "),";
             }
 
             query = query.substring(0, query.length() -1);
-            System.out.println(query);
-             pe.nonquery(query);
+            //System.out.println(query);
+            pe.nonquery(query);
         } 
         catch(Exception e){
             System.out.println("load data failed");
@@ -97,20 +109,16 @@ public class PeerEval
     public Scanner loadFile(final String fileName) 
     {
         Scanner s;
+        String fullFileName = "";
         try{
-
-            //not sure if the prefix or post fix is needed??
             //
-            //
-            String fullFileName =  "..\\..\\resources\\" + fileName + ".csv";
+            File fullFile = new File("src/main/resources/" + fileName + ".csv");
 
-            File fullFile = new File(getClass().getClassLoader().getResource(fullFileName).getFile());
-           
             s = new Scanner(fullFile);
-            System.out.println(s.next() + "Test");
+
         } catch (IOException e){
-            //e.printStackTrace();
-            throw new IllegalArgumentException(fileName + " is not found");
+            e.printStackTrace();
+            throw new IllegalArgumentException(fullFileName + " is not found");
         }
         //this.getClass().getClassLoader().getResourceAsStream("..\\..\\resources\\" +fileName);
         
