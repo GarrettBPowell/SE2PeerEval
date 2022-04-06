@@ -98,11 +98,18 @@ public class PeerEval
     {
         Scanner s;
         try{
-            ClassLoader classLoader = getClass().getClassLoader();
-            File fullFile = new File("..\\..\\resources\\" + fileName + ".csv");
+
+            //not sure if the prefix or post fix is needed??
+            //
+            //
+            String fullFileName =  "..\\..\\resources\\" + fileName + ".csv";
+
+            File fullFile = new File(getClass().getClassLoader().getResource(fullFileName).getFile());
+           
             s = new Scanner(fullFile);
+            System.out.println(s.next() + "Test");
         } catch (IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new IllegalArgumentException(fileName + " is not found");
         }
         //this.getClass().getClassLoader().getResourceAsStream("..\\..\\resources\\" +fileName);

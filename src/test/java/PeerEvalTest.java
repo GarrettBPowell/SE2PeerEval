@@ -86,11 +86,12 @@ public class PeerEvalTest
     public void loadDataTestRes() {
         String fileName = "response";
         String tableName = "response";
+        
+        try{  
         pc.loadData(fileName, tableName);
 
         int n = -1;
         n = count_rows_con(tableName, "where evalid = '1'");
-         try{  
                   assertEquals(n, 10);
                 }
         catch(Exception e){
@@ -103,15 +104,16 @@ public class PeerEvalTest
     //tests loading in teams csv into teams table and checking count of values of evalid = 1 
     @Test
     public void loadDataTestTeam1() {
-        String fileName = "teams";
-        String tableName = "team";
-        pc.loadData(fileName, tableName);
-
-        int n = -1;
-        n = count_rows_con(tableName, "where evalid = '1'");
+         String fileName = "teams";
+         String tableName = "team";
+         
          try{  
-                  assertEquals(n, 4);
-                }
+                pc.loadData(fileName, tableName);
+
+                int n = -1;
+                n = count_rows_con(tableName, "where evalid = '1'");
+                assertEquals(n, 4);
+        }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
         }
@@ -125,13 +127,14 @@ public class PeerEvalTest
     public void loadDataTestTeam2() {
         String fileName = "teams";
         String tableName = "team";
-        pc.loadData(fileName, tableName);
 
-        int n = -1;
-        n = count_rows_con(tableName, "where evalid = '2'");
-         try{  
-                  assertEquals(n, 4);
-                }
+        try{  
+                pc.loadData(fileName, tableName);
+
+                int n = -1;
+                n = count_rows_con(tableName, "where evalid = '2'");
+                assertEquals(n, 4);
+        }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
         }
@@ -163,10 +166,9 @@ public class PeerEvalTest
     @Test
     public void ReadCSV()
     {
-        PeerEval test = new PeerEval();
-        Scanner s = test.loadFile("response");
-
         try{  
+            PeerEval test = new PeerEval();
+            Scanner s = test.loadFile("response");
             assertNotEquals(s, null);
                 }
         catch(Exception e){
@@ -178,12 +180,13 @@ public class PeerEvalTest
 
     //this tests that the buffered reader can be created with the given file name
     @Test
-    public void getBR()
+    public void getScanner()
     {
         PeerEval test = new PeerEval();
-        Scanner s = test.loadFile("response");
+        
 
         try{  
+            Scanner s = test.loadFile("response");
             assertNotEquals(s, null);
                 }
         catch(Exception e){
