@@ -112,7 +112,7 @@ public class PeerEval
         String fullFileName = "";
         try{
             //
-            File fullFile = new File("src/main/resources/" + fileName + ".csv");
+            File fullFile = new File("src/resources/" + fileName + ".csv");
 
             s = new Scanner(fullFile);
 
