@@ -34,7 +34,7 @@ public class PeerEvalTest
     
     public void response_inserts() {
 	pc.nonquery("insert into response (evalid, student1, student2, category, value) values " +
-		    "(10,1,2,'C',5), (10,1,2,'H',4), (10,1,2,'I',3), (10,1,2,'K',2), (10,1,2,'E',1), (10,1,3,'C',1), (10,1,3,'H',2), (10,1,3,'I',3), (10,1,3,'K',4), (10,1,3,'E',5)"
+		    "(999,1,2,'C',5), (999,1,2,'H',4), (999,1,2,'I',3), (999,1,2,'K',2), (999,1,2,'E',1), (999,1,3,'C',1), (999,1,3,'H',2), (999,1,3,'I',3), (999,1,3,'K',4), (999,1,3,'E',5)"
 		    );	
     }
 
@@ -91,14 +91,14 @@ public class PeerEvalTest
         pc.loadData(fileName, tableName);
 
         int n = -1;
-        n = count_rows_con(tableName, "where evalid = '1'");
+        n = count_rows_con(tableName, "where evalid = '999'");
                   assertEquals(10, n);
                 }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
         }
  
-        delete_con(tableName, "where evalid = '1'");
+        delete_con(tableName, "where evalid = '999'");
     }
 
     //tests loading in teams csv into teams table and checking count of values of evalid = 1 
@@ -111,15 +111,15 @@ public class PeerEvalTest
                 pc.loadData(fileName, tableName);
 
                 int n = -1;
-                n = count_rows_con(tableName, "where evalid = '1'");
+                n = count_rows_con(tableName, "where evalid = '999'");
                 assertEquals(4, n);
         }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
         }
  
-        delete_con(tableName, "where evalid = '1'");
-        delete_con(tableName, "where evalid = '2'");
+        delete_con(tableName, "where evalid = '999'");
+        delete_con(tableName, "where evalid = '1000'");
     }
 
     //tests loading in teams csv into teams table and checking count of values of evalid = 2
@@ -132,24 +132,24 @@ public class PeerEvalTest
                 pc.loadData(fileName, tableName);
 
                 int n = -1;
-                n = count_rows_con(tableName, "where evalid = '2'");
+                n = count_rows_con(tableName, "where evalid = '1000'");
                 assertEquals(4, n);
         }
         catch(Exception e){
             System.out.println("loadDataTest Response fail");
         }
  
-        delete_con(tableName, "where evalid = '1'");
-        delete_con(tableName, "where evalid = '2'");
+        delete_con(tableName, "where evalid = '999'");
+        delete_con(tableName, "where evalid = '1000'");
     }
     
     //checks deleting from tables conditionally
     @Test
     public void check_delete_con () {
 	int n = -1;
-	delete_con("response", "where evalid = '10'");
-	n = count_rows_con("response", "where evalid = '10'");
-	assertEquals("response table where evalid = 10 should be empty", 0, n);
+	delete_con("response", "where evalid = '999'");
+	n = count_rows_con("response", "where evalid = '999'");
+	assertEquals("response table where evalid = 999 should be empty", 0, n);
     }
 
     //checks inserting into response table
@@ -158,7 +158,7 @@ public class PeerEvalTest
 	int n = -1;
 
 	response_inserts();
-	n = count_rows_con("response", "where evalid = '10'");
+	n = count_rows_con("response", "where evalid = '999'");
 	assertTrue(n == 10);
     }
 
