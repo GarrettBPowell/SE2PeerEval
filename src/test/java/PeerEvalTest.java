@@ -86,7 +86,8 @@ public class PeerEvalTest
     public void loadDataTestRes() {
         String fileName = "response";
         String tableName = "response";
-        
+        delete_con(tableName, "where evalid = '999'");
+
         try{  
         pc.loadData(fileName, tableName);
 
@@ -398,7 +399,7 @@ public class PeerEvalTest
 
         try{  
            s.nextLine();
-           assertEquals(s.nextLine().split(",")[0], "1");
+           assertEquals(s.nextLine().split(",")[0], "999");
            s.close();
                 }
         catch(Exception e){
@@ -486,7 +487,7 @@ public class PeerEvalTest
         try{  
            s.nextLine();
            s.nextLine();
-           assertEquals(s.nextLine().split(",")[0], "1");
+           assertEquals(s.nextLine().split(",")[0], "999");
            s.close();
                 }
         catch(Exception e){
@@ -577,7 +578,7 @@ public class PeerEvalTest
             s.nextLine();
             s.nextLine();
             s.nextLine();
-            assertEquals(s.nextLine().split(",")[0], "1");
+            assertEquals(s.nextLine().split(",")[0], "999");
             s.close();
                 }
         catch(Exception e){
