@@ -81,6 +81,27 @@ public class PeerEvalTest
 	return n;
     }
 
+    public int avg_rows (String table, String column) {
+	ResultSet rs;
+	int n = -1;
+	try {
+	    rs = pc.query("select avg(" + column + ") as n from " + table);
+	} catch (Exception e) {
+	    System.out.println("ERROR select avg(value) as n: " + e.getMessage());
+	    assertTrue(false);
+	    return -1;
+	}
+	try {
+	    rs.next();
+	    n = rs.getInt("n");
+	} catch (Exception e) {
+	    System.out.println("ERROR rs.next() and getInt()");
+	    assertTrue(false);
+	    return -1;
+	}
+	return n;
+    }
+
     //tests loading in the given file into the given table name
     @Test
     public void loadDataTestRes() {
@@ -664,5 +685,20 @@ public class PeerEvalTest
         }
     }
     
+    //checks averages in value column of response table
+    @Test
+    public void check_valAvg () {
+	float n = -1;
 
+	response_inserts();
+	n = avg_rows("response", "value");
+
+    
+	try{ 
+           assertEquals(n, 3.0, 0.001);
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
 }
