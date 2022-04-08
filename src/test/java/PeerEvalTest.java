@@ -685,6 +685,7 @@ public class PeerEvalTest
         }
     }
     
+    
     //checks averages in value column of response table
     @Test
     public void sql_check_valAvg () {
@@ -700,6 +701,373 @@ public class PeerEvalTest
                 }
         catch(Exception e){
             System.out.println("Average value failed");
+        }
+    }
+
+    //counts rows with category C
+    @Test
+    public void sql_count_categoriesC () {
+    delete_con("response", "where category = 'C'");
+	int n = -1;
+
+	response_inserts();
+	n = count_rows_con("response", "where category = 'C'");
+	assertTrue(n == 2);
+    delete_con("response", "where category = 'C'");
+    }
+
+    //counts rows with category H
+    @Test
+    public void sql_count_categoriesH () {
+    delete_con("response", "where category = 'H'");
+	int n = -1;
+
+	response_inserts();
+	n = count_rows_con("response", "where category = 'H'");
+	assertTrue(n == 2);
+    delete_con("response", "where category = 'H'");
+    }
+
+    //counts rows with student2 = 2
+    @Test
+    public void sql_count_student2s2 () {
+    delete_con("response", "where student2 = '2'");
+	int n = -1;
+
+	response_inserts();
+	n = count_rows_con("response", "where student2 = '2'");
+	assertTrue(n == 5);
+    delete_con("response", "where student2 = '2'");
+    }
+
+    //counts rows with student2 = 3
+    @Test
+    public void sql_count_student2s3 () {
+    delete_con("response", "where student2 = '3'");
+	int n = -1;
+
+	response_inserts();
+	n = count_rows_con("response", "where student2 = '3'");
+	assertTrue(n == 5);
+    delete_con("response", "where student2 = '3'");
+    }
+
+    //-----------------------------------------------------------------------
+
+    //confirm fourth value in table is 999
+    @Test
+    public void java_getInt13()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            assertEquals(s.nextLine().split(",")[0], "999");
+            s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fourth value second column is 1
+    @Test
+    public void java_getInt14()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[1], "1");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fourth value third column is 2
+    @Test
+    public void java_getInt15()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[2], "2");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fourth value fourth column is 'K'
+    @Test
+    public void java_getChar4()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[3], "'K'");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fourth value fifth column is 2
+    @Test
+    public void java_getInt16()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[4], "2");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fifth value in table is 999
+    @Test
+    public void java_getInt17()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            assertEquals(s.nextLine().split(",")[0], "999");
+            s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fifth value second column is 1
+    @Test
+    public void java_getInt18()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[1], "1");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fifth value third column is 2
+    @Test
+    public void java_getInt19()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[2], "2");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fifth value fourth column is 'E'
+    @Test
+    public void java_getChar5()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[3], "'E'");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm fifth value fifth column is 3
+    @Test
+    public void java_getInt20()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[4], "1");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+
+
+
+    //confirm sixth value in table is 999
+    @Test
+    public void java_getInt21()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            assertEquals(s.nextLine().split(",")[0], "999");
+            s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm sixth value second column is 1
+    @Test
+    public void java_getInt22()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[1], "1");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm sixth value third column is 3
+    @Test
+    public void java_getInt23()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+            s.nextLine();
+           assertEquals(s.nextLine().split(",")[2], "3");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm sixth value fourth column is 'C'
+    @Test
+    public void java_getChar6()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[3], "'C'");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
+        }
+    }
+
+    //confirm sixth value fifth column is 1
+    @Test
+    public void java_getInt24()
+    {
+        PeerEval test = new PeerEval();
+        Scanner s = test.loadFile("response");
+
+        try{  
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           s.nextLine();
+           assertEquals(s.nextLine().split(",")[4], "1");
+           s.close();
+                }
+        catch(Exception e){
+            System.out.println("Read line failed");
         }
     }
 }
