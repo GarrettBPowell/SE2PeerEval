@@ -687,7 +687,7 @@ public class PeerEvalTest
     
     //checks averages in value column of response table
     @Test
-    public void check_valAvg () {
+    public void sql_check_valAvg () {
 	float n = -1;
 
 	response_inserts();
@@ -696,9 +696,10 @@ public class PeerEvalTest
     
 	try{ 
            assertEquals(n, 3.0, 0.001);
+           delete_con("response", "value");
                 }
         catch(Exception e){
-            System.out.println("Read line failed");
+            System.out.println("Average value failed");
         }
     }
 }
