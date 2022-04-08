@@ -156,11 +156,13 @@ public class PeerEvalTest
     //checks inserting into response table
     @Test
     public void check_inserts () {
+    delete_con("response", "where evalid = '999'");
 	int n = -1;
 
 	response_inserts();
 	n = count_rows_con("response", "where evalid = '999'");
 	assertTrue(n == 10);
+    delete_con("response", "where evalid = '999'");
     }
 
     //this tests the the input steam opens with given file name
