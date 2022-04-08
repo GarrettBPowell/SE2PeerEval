@@ -99,7 +99,7 @@ SELECT r.evalid as eval, r.student1 as s1,
 r.student2 as s2, r.category as cat, r.value as v, t.teamid as team
 FROM response r
 inner join team t on (t.student = r.student1)
-order by r.evalid, r.student1, r.student2, r.category
+order by r.evalid, r.student1, r.student2, r.category;
 
 CREATE VIEW v_stuAvg AS 
 SELECT eval, team, s2, count(v) n, avg(v) avg 
