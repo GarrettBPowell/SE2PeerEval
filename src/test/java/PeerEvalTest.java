@@ -83,7 +83,7 @@ public class PeerEvalTest
 
     //tests loading in the given file into the given table name
     @Test
-    public void loadDataTestRes() {
+    public void sql_loadDataTestRes() {
         String fileName = "response";
         String tableName = "response";
         delete_con(tableName, "where evalid = '999'");
@@ -104,7 +104,7 @@ public class PeerEvalTest
 
     //tests loading in teams csv into teams table and checking count of values of evalid = 1 
     @Test
-    public void loadDataTestTeam1() {
+    public void sql_loadDataTestTeam1() {
          String fileName = "teams";
          String tableName = "team";
          
@@ -125,7 +125,7 @@ public class PeerEvalTest
 
     //tests loading in teams csv into teams table and checking count of values of evalid = 2
     @Test
-    public void loadDataTestTeam2() {
+    public void sql_loadDataTestTeam2() {
         String fileName = "teams";
         String tableName = "team";
 
@@ -146,7 +146,7 @@ public class PeerEvalTest
     
     //checks deleting from tables conditionally
     @Test
-    public void check_delete_con () {
+    public void sql_check_delete_con () {
 	int n = -1;
 	delete_con("response", "where evalid = '999'");
 	n = count_rows_con("response", "where evalid = '999'");
@@ -155,7 +155,7 @@ public class PeerEvalTest
 
     //checks inserting into response table
     @Test
-    public void check_inserts () {
+    public void sql_check_inserts () {
     delete_con("response", "where evalid = '999'");
 	int n = -1;
 
@@ -167,7 +167,7 @@ public class PeerEvalTest
 
     //this tests the the input steam opens with given file name
     @Test
-    public void ReadCSV()
+    public void java_ReadCSV()
     {
 
         try{  
@@ -184,7 +184,7 @@ public class PeerEvalTest
 
     //this tests that the buffered reader can be created with the given file name
     @Test
-    public void getScanner()
+    public void java_getScanner()
     {
         PeerEval test = new PeerEval();
         
@@ -201,7 +201,7 @@ public class PeerEvalTest
     
     //confirm first value in file is eval number column name
     @Test
-    public void ReadWordOne()
+    public void java_ReadWordOne()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -220,7 +220,7 @@ public class PeerEvalTest
 
     //confirm second value in file is S1 column name
     @Test
-    public void ReadWordTwo()
+    public void java_ReadWordTwo()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -241,7 +241,7 @@ public class PeerEvalTest
     
     //confirm 3rd value in file is S2 column name
     @Test
-    public void ReadWordThree()
+    public void java_ReadWordThree()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -260,7 +260,7 @@ public class PeerEvalTest
 
     //confirm 4th value in file is Question column name
     @Test
-    public void ReadWordFour()
+    public void java_ReadWordFour()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");      
@@ -279,7 +279,7 @@ public class PeerEvalTest
 
     //confirm 5th value in file is value column name
     @Test
-    public void ReadWordFive()
+    public void java_ReadWordFive()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -298,7 +298,7 @@ public class PeerEvalTest
 
         //confirm first value in file is eval number column name
     @Test
-    public void ReadWordOneTeam()
+    public void java_ReadWordOneTeam()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("teams");
@@ -317,7 +317,7 @@ public class PeerEvalTest
 
     //confirm second value in file is S1 column name
     @Test
-    public void ReadWordTwoTeam()
+    public void java_ReadWordTwoTeam()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("teams");
@@ -336,7 +336,7 @@ public class PeerEvalTest
 
     //confirm 3rd value in file is S2 column name
     @Test
-    public void ReadWordThreeTeam()
+    public void java_ReadWordThreeTeam()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("teams");
@@ -354,7 +354,7 @@ public class PeerEvalTest
     }
     //confirm values out of column names are strings
     @Test
-    public void getStringsResponse()
+    public void java_getStringsResponse()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -375,7 +375,7 @@ public class PeerEvalTest
         
     //confirm values out of column names are strings
     @Test
-    public void getStringsTeams()
+    public void java_getStringsTeams()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("teams");
@@ -394,7 +394,7 @@ public class PeerEvalTest
 
     //confirm first value in table is 1
     @Test
-    public void getInt1()
+    public void java_getInt1()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -411,7 +411,7 @@ public class PeerEvalTest
 
     //confirm first value second column is 1
     @Test
-    public void getInt2()
+    public void java_getInt2()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -430,7 +430,7 @@ public class PeerEvalTest
 
     //confirm first value third column is 2
     @Test
-    public void getInt3()
+    public void java_getInt3()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -447,7 +447,7 @@ public class PeerEvalTest
 
     //confirm first value fourth column is 'C'
     @Test
-    public void getChar1()
+    public void java_getChar1()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -464,7 +464,7 @@ public class PeerEvalTest
 
     //confirm first value fifth column is 5
     @Test
-    public void getInt4()
+    public void java_getInt4()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -481,7 +481,7 @@ public class PeerEvalTest
 
     //confirm second value in table is 1
     @Test
-    public void getInt5()
+    public void java_getInt5()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -499,7 +499,7 @@ public class PeerEvalTest
 
     //confirm second value second column is 1
     @Test
-    public void getInt6()
+    public void java_getInt6()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -517,7 +517,7 @@ public class PeerEvalTest
 
     //confirm second value third column is 2
     @Test
-    public void getInt7()
+    public void java_getInt7()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -535,7 +535,7 @@ public class PeerEvalTest
 
     //confirm second value fourth column is 'H'
     @Test
-    public void getChar2()
+    public void java_getChar2()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -553,7 +553,7 @@ public class PeerEvalTest
 
     //confirm second value fifth column is 4
     @Test
-    public void getInt8()
+    public void java_getInt8()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -571,7 +571,7 @@ public class PeerEvalTest
 
     //confirm third value in table is 1
     @Test
-    public void getInt9()
+    public void java_getInt9()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -590,7 +590,7 @@ public class PeerEvalTest
 
     //confirm third value second column is 1
     @Test
-    public void getInt10()
+    public void java_getInt10()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -609,7 +609,7 @@ public class PeerEvalTest
 
     //confirm third value third column is 2
     @Test
-    public void getInt11()
+    public void java_getInt11()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -628,7 +628,7 @@ public class PeerEvalTest
 
     //confirm third value fourth column is 'I'
     @Test
-    public void getChar3()
+    public void java_getChar3()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
@@ -647,7 +647,7 @@ public class PeerEvalTest
 
     //confirm third value fifth column is 3
     @Test
-    public void getInt12()
+    public void java_getInt12()
     {
         PeerEval test = new PeerEval();
         Scanner s = test.loadFile("response");
