@@ -3,10 +3,8 @@
     "",
     "\\src",
     "\\src\\main",
-    "\\src\\main\\java",
-    "\\src\\resources",
+    "\\src\\test",
     "\\src\\test\\java"
   ],
-  "SelectedNode": "\\src\\resources\\sql (2)",
   "PreviewInSolutionExplorer": false
 }

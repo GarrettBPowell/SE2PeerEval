@@ -28,7 +28,6 @@ import java.io.*;
 *		mvn compile
 *	
 *	How to run/execute:
-*       make sure you are cd all the way into java file
 *       mvn test
 *		mvn install assembly:assembly
 *       java -cp target/java_postgres-1.0-SNAPSHOT-jar-with-dependencies.jar PeerEval
@@ -50,6 +49,8 @@ public class PeerEval
     {
         System.out.println("Hello");
         loadData("response", "response");
+
+        
      }
 
     public static void loadData(String fileName, String tableName)
@@ -112,7 +113,7 @@ public class PeerEval
         String fullFileName = "";
         try{
             //
-            File fullFile = new File("src/resources/" + fileName + ".csv");
+            File fullFile = new File("src/main/resources/" + fileName + ".csv");
 
             s = new Scanner(fullFile);
 
@@ -187,5 +188,23 @@ public class PeerEval
 	        exec.printStackTrace();
 	    }
     }
+
+    /*
+    public void print_view(ResultSet rs){
+        try{
+            while(rs.next())
+            {
+                System.out.println(rs);
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void printStuAvg()
+    {
+        print_view(query("Select * from v_stuavg"));
+    }*/
 
 }
