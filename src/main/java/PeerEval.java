@@ -47,16 +47,89 @@ public class PeerEval
 
     public static void main(final String[] args) throws IOException 
     {
-        System.out.println("Hello");
-        loadData("response", "response");
+        Scanner sin = new Scanner(System.in);
+        PeerEval peerEval = new PeerEval();
+        String [] options = 
+        {
+        "1. Load CSV",
+        "2. Print Report"
+        };
 
+        //begin menu
+        System.out.println("Welcome to Peer Eval\nWhat would you like to do? (Please select a number from the list)");
         
+        for(String var : options)
+        {
+            System.out.println(var);
+        }
+
+        String userResponse = "";
+        System.out.print("\nSelection: ");
+        userResponse = sin.nextLine();
+
+        System.out.print("\nOption selected: ");
+        switch(userResponse)
+        {
+            case "1.": 
+            case "1": 
+                System.out.println("(Load CSV)");
+                peerEval.loadFileMenu();
+                break;
+            case "2.":
+            case "2":
+                 System.out.println("(Print Report)");
+                 break;
+             default: 
+                System.out.println("Option not found");
+                break;
+
+        }
+
+     }
+
+
+     public void loadFileMenu()
+     {
+        Scanner sin = new Scanner(System.in);
+        System.out.println("Make sure the file you are wanting to input has been placed in the resources file of this project. \nThis is located at filepath: src/main/resources\n");
+        System.out.print("What is the exact name of the csv file you are wanting to read from? (Do not include .csv)\nFile name:");
+
+        String fileName = sin.nextLine();
+        
+        try{
+
+            loadFile(fileName);
+        }
+        catch(Exception e)
+        {
+            System.out.println("************************************");
+            System.out.println("A file by that name was not found.\n");
+            System.out.println("************************************");
+            loadFileMenu();
+        }
+
+
+        System.out.print("What is the name of the table this file is being input into?\nTable name:");
+        String tableName = "";
+        tableName = sin.nextLine();
+
+        try{
+            loadData(fileName, tableName);
+        }
+        catch(Exception e)
+        {
+            System.out.println("************************************");
+            System.out.println("A table by that name was not found.\n");
+            System.out.println("************************************");
+            loadFileMenu();
+        }
      }
 
     public static void loadData(String fileName, String tableName)
     {
         PeerEval pe = new PeerEval();
         c = null;
+
         try{
             Class.forName("org.postgresql.Driver");
             c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
@@ -64,6 +137,7 @@ public class PeerEval
         {
             e.printStackTrace();
         }
+        
 
 
         Scanner s;
@@ -93,9 +167,10 @@ public class PeerEval
         }
     }
 
-    public static Connection connect(String url, String userN, String pass) {
-
-        try {
+    //connect to database
+    public static Connection connect(String url, String userN, String pass) 
+    {
+       try {
                 Class.forName("org.postgresql.Driver");
                 c = DriverManager.getConnection(url, userN, pass);
             } 
@@ -107,10 +182,11 @@ public class PeerEval
         return c;
     }
 
+
     public Scanner loadFile(final String fileName) 
     {
+        //scanner for reading file
         Scanner s;
-        String fullFileName = "";
         try{
             //
             File fullFile = new File("src/main/resources/" + fileName + ".csv");
@@ -119,7 +195,7 @@ public class PeerEval
 
         } catch (IOException e){
             e.printStackTrace();
-            throw new IllegalArgumentException(fullFileName + " is not found");
+            throw new IllegalArgumentException(fileName + " is not found");
         }
         //this.getClass().getClassLoader().getResourceAsStream("..\\..\\resources\\" +fileName);
         
@@ -156,7 +232,8 @@ public class PeerEval
     }
 
 
-    public void nonquery(String inQuery)  {
+    public void nonquery(String inQuery)  
+    {
 	//	System.out.println("nonquery: [" + inQuery + "]");
 	ResultSet rs;
 	    try {
@@ -188,23 +265,4 @@ public class PeerEval
 	        exec.printStackTrace();
 	    }
     }
-
-    /*
-    public void print_view(ResultSet rs){
-        try{
-            while(rs.next())
-            {
-                System.out.println(rs);
-            }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public static void printStuAvg()
-    {
-        print_view(query("Select * from v_stuavg"));
-    }*/
-
 }
