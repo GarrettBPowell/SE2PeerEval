@@ -49,6 +49,7 @@ public class PeerEval
     {
         Scanner sin = new Scanner(System.in);
         PeerEval peerEval = new PeerEval();
+        //list of program options that will be outputted and then switched on based on user input
         String [] options = 
         {
         "1. Load CSV",
@@ -58,6 +59,7 @@ public class PeerEval
         //begin menu
         System.out.println("Welcome to Peer Eval\nWhat would you like to do? (Please select a number from the list)");
         
+        //print all program options
         for(String var : options)
         {
             System.out.println(var);
@@ -67,6 +69,8 @@ public class PeerEval
         System.out.print("\nSelection: ");
         userResponse = sin.nextLine();
 
+        //Switch on what option user inputted 
+        //Currently accounting for single number or number. options ex (1 or 1.)
         System.out.print("\nOption selected: ");
         switch(userResponse)
         {
@@ -82,12 +86,12 @@ public class PeerEval
              default: 
                 System.out.println("Option not found");
                 break;
-
         }
-
      }
 
 
+     //Contains text prompts for user in command line terminal 
+     //Calls other functions but does not do anything to files or database
      public void loadFileMenu()
      {
         Scanner sin = new Scanner(System.in);
@@ -96,6 +100,7 @@ public class PeerEval
 
         String fileName = sin.nextLine();
         
+        //check to make sure file is there before moving on
         try{
 
             loadFile(fileName);
@@ -113,7 +118,11 @@ public class PeerEval
         String tableName = "";
         tableName = sin.nextLine();
 
+        //try loading file into table
         try{
+        //
+        //Potentially try to connect to table before attempting to load
+        //
             loadData(fileName, tableName);
         }
         catch(Exception e)
@@ -125,9 +134,13 @@ public class PeerEval
         }
      }
 
+
+    //attempts to load data from given file into given table
     public static void loadData(String fileName, String tableName)
     {
         PeerEval pe = new PeerEval();
+        Scanner s;
+        String columnNames = "";
         c = null;
 
         try{
@@ -135,14 +148,10 @@ public class PeerEval
             c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
         } catch(Exception e)
         {
+            System.out.println("Failed to connect to database when loading data");
             e.printStackTrace();
         }
         
-
-
-        Scanner s;
-
-        String columnNames = "";
         try{
             s = pe.loadFile(fileName);
 
@@ -167,22 +176,25 @@ public class PeerEval
         }
     }
 
+
     //connect to database
     public static Connection connect(String url, String userN, String pass) 
     {
-       try {
-                Class.forName("org.postgresql.Driver");
-                c = DriverManager.getConnection(url, userN, pass);
-            } 
-            catch (Exception e) {
-                e.printStackTrace();
-                System.err.println(e.getClass().getName()+": "+e.getMessage());
-                System.exit(0);
-            }
+       try 
+       {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection(url, userN, pass);
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
+        }
         return c;
     }
 
 
+    //loads a file given the filename
     public Scanner loadFile(final String fileName) 
     {
         //scanner for reading file
@@ -192,8 +204,9 @@ public class PeerEval
             File fullFile = new File("src/main/resources/" + fileName + ".csv");
 
             s = new Scanner(fullFile);
-
-        } catch (IOException e){
+        } 
+        catch (IOException e)
+        {
             e.printStackTrace();
             throw new IllegalArgumentException(fileName + " is not found");
         }
@@ -201,6 +214,7 @@ public class PeerEval
         
         return s;
     }
+
 
     public void printFile(Scanner s)
     {
@@ -221,6 +235,7 @@ public class PeerEval
         }
     }
 
+
     public ResultSet query(String inQuery) throws Exception {
 	    //	System.out.println("query: [" + inQuery + "]");
 	    ResultSet rs = null;
@@ -234,8 +249,8 @@ public class PeerEval
 
     public void nonquery(String inQuery)  
     {
-	//	System.out.println("nonquery: [" + inQuery + "]");
-	ResultSet rs;
+	    //	System.out.println("nonquery: [" + inQuery + "]");
+	    ResultSet rs;
 	    try {
 	        PreparedStatement pstmt = c.prepareStatement(inQuery);
 	        rs = pstmt.executeQuery();
@@ -246,6 +261,7 @@ public class PeerEval
 	        }
 	    }
     }
+
 
     public void v_response_print(ResultSet rs) {
 	System.out.println("evalid\tstudent1\tstudent2\tcategory\tvalue");
