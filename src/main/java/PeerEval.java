@@ -236,7 +236,7 @@ public class PeerEval
         }
     }
 
-
+    //querys and accounts for a return value (select)
     public ResultSet query(String inQuery) throws Exception {
 	    //	System.out.println("query: [" + inQuery + "]");
 	    ResultSet rs = null;
@@ -247,7 +247,7 @@ public class PeerEval
 	    return rs;
     }
 
-
+    //querys for query with no return value (insert, delete, etc)
     public void nonquery(String inQuery)  
     {
 	    //	System.out.println("nonquery: [" + inQuery + "]");
@@ -263,6 +263,8 @@ public class PeerEval
 	    }
     }
 
+
+    //displays menu when print report is selected 
     public void printReportMenu()
     {
         Scanner sin = new Scanner(System.in);
@@ -307,6 +309,7 @@ public class PeerEval
         }     
     }
 
+    //displays menu for when student is selected in the print report screen
     public void printStudentMenu()
     {
         Scanner sin = new Scanner(System.in);
@@ -357,6 +360,8 @@ public class PeerEval
         } 
     }
 
+
+    //prints a single student for a single evalid
     public void printSingleStudent()
     {
      
@@ -383,7 +388,7 @@ public class PeerEval
 
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
-            printView(query(queryString));
+            printResultSet(query(queryString));
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
@@ -391,7 +396,8 @@ public class PeerEval
 
     }
 
-    public void printView(ResultSet rs)
+    //prints a given result set entirely
+    public void printResultSet(ResultSet rs)
     {
         try{
             ResultSetMetaData rsmd = rs.getMetaData();
