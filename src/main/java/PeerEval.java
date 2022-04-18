@@ -41,7 +41,7 @@ import java.io.*;
 public class PeerEval
 {
     public static String filePath;
-    private static String url = "jdbc:postgresql://localhost:5432/SE375v1";
+    private static String url = "jdbc:postgresql://localhost:5432/cs375v1";
     private static String user = "mrblee";
     private static String password = "purplewhite";
     public static Connection c;
@@ -49,6 +49,12 @@ public class PeerEval
 
     public static void main(final String[] args) throws IOException 
     {
+        pe.logon();
+        
+     }
+
+     public void logon()
+     {       
         Scanner sin = new Scanner(System.in);
         //list of program options that will be outputted and then switched on based on user input
         String [] options = 
@@ -56,6 +62,44 @@ public class PeerEval
         "1. Load CSV",
         "2. Print Report"
         };
+
+
+        System.out.print("Please enter your credentials.\nUsername: ");
+        user = sin.nextLine();
+        System.out.print("\nPlease enter your password: ");
+        password = sin.nextLine();
+
+        try{
+            connect(url, user, password);
+
+            //if can logon Currently just runs admin menu
+            adminMenu();
+        }
+        catch (Exception e)
+        {
+            System.out.println("*************************************************");
+            System.out.println("Incorrect Username or Password. Please try again.");
+            System.out.println("*************************************************");
+            pe.logon();
+        }
+     }
+
+     public void adminMenu()
+     {
+        Scanner sin = new Scanner(System.in);
+        //list of program options that will be outputted and then switched on based on user input
+        String [] options = 
+        {
+        "1. Load CSV",
+        "2. Print Report"
+        };
+
+
+        System.out.print("Please enter your credentials.\nUsername: ");
+        user = sin.nextLine();
+        System.out.print("\nPlease enter your password: ");
+        password = sin.nextLine();
+
 
         //begin menu
         System.out.println("Welcome to Peer Eval\nWhat would you like to do? (Please select a number from the list)");
@@ -90,7 +134,6 @@ public class PeerEval
                 break;
         }
      }
-
 
      //Contains text prompts for user in command line terminal 
      //Calls other functions but does not do anything to files or database
@@ -404,14 +447,16 @@ public class PeerEval
             int columnsNumber = rsmd.getColumnCount();
             while (rs.next()) 
             {
-                for (int i = 1; i <= columnsNumber; i++) {
+                for (int i = 1; i <= columnsNumber; i++) 
+                {
                     if (i > 1) System.out.print(",  ");
                         String columnValue = rs.getString(i);
                     System.out.print(columnValue + " " + rsmd.getColumnName(i));
-    }
-    System.out.println("");
-}
-        }catch(Exception e)
+                }
+                System.out.println("");
+            }
+        }
+        catch(Exception e)
         {
             System.out.println("Print View failed");
         }
