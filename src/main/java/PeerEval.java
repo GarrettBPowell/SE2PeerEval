@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.*;
 
 import java.io.File; 
 import java.util.*;
@@ -44,11 +45,11 @@ public class PeerEval
     private static String user = "mrblee";
     private static String password = "purplewhite";
     public static Connection c;
+    public static PeerEval pe = new PeerEval();
 
     public static void main(final String[] args) throws IOException 
     {
         Scanner sin = new Scanner(System.in);
-        PeerEval peerEval = new PeerEval();
         //list of program options that will be outputted and then switched on based on user input
         String [] options = 
         {
@@ -77,13 +78,14 @@ public class PeerEval
             case "1.": 
             case "1": 
                 System.out.println("(Load CSV)");
-                peerEval.loadFileMenu();
+                pe.loadFileMenu();
                 break;
             case "2.":
             case "2":
-                 System.out.println("(Print Report)");
-                 break;
-             default: 
+                System.out.println("(Print Report)");
+                pe.printReportMenu();
+                break;
+            default: 
                 System.out.println("Option not found");
                 break;
         }
@@ -138,7 +140,6 @@ public class PeerEval
     //attempts to load data from given file into given table
     public static void loadData(String fileName, String tableName)
     {
-        PeerEval pe = new PeerEval();
         Scanner s;
         String columnNames = "";
         c = null;
@@ -262,11 +263,158 @@ public class PeerEval
 	    }
     }
 
+    public void printReportMenu()
+    {
+        Scanner sin = new Scanner(System.in);
+        String [] options = 
+        {
+        "1. Student Report (By Student ID)",
+        "2. Class Report (By Eval ID)"
+        };
+
+
+        System.out.println("What report would you like to print?");
+        
+        //print all program options
+        for(String var : options)
+        {
+            System.out.println(var);
+        }
+        System.out.print("\nOption selected: ");
+
+        String userResponse = "";
+        System.out.print("\nSelection: ");
+        userResponse = sin.nextLine();
+
+        //Switch on what option user inputted 
+        //Currently accounting for single number or number. options ex (1 or 1.)
+        System.out.print("\nOption selected: ");
+        switch(userResponse)
+        {
+            case "1.": 
+            case "1": 
+                System.out.println("(Student Report)");
+                printStudentMenu();
+                break;
+            case "2.":
+            case "2":
+                System.out.println("(Class Report)");
+                
+                break;
+            default: 
+                System.out.println("Option not found");
+                break;
+        }     
+    }
+
+    public void printStudentMenu()
+    {
+        Scanner sin = new Scanner(System.in);
+        String [] options = 
+        {
+        "1. Single Student Report (Student ID and EvalID)",
+        "2. All Student's Reports (Student ID)",
+        "3. All Student Reports with overall Stats (Student ID)"
+        };
+
+
+        System.out.println("What report would you like to print?");
+        //print all program options
+        for(String var : options)
+        {
+            System.out.println(var);
+        }
+        System.out.print("\nOption selected: ");
+
+        String userResponse = "";
+        System.out.print("\nSelection: ");
+        userResponse = sin.nextLine();
+        
+        //Switch on what option user inputted 
+        //Currently accounting for single number or number. options ex (1 or 1.)
+        System.out.print("\nOption selected: ");
+        switch(userResponse)
+        {
+            case "1.": 
+            case "1": 
+                System.out.println("(Single Student Report)");
+                printSingleStudent();
+                
+                break;
+            case "2.":
+            case "2":
+                System.out.println("(All Student's Reports)");
+
+                break;
+            case "3.":
+            case "3":
+                System.out.println("(All Student's Reports with overall Stats)");
+
+                break;
+            default: 
+                System.out.println("Option not found");
+                break;
+        } 
+    }
+
+    public void printSingleStudent()
+    {
+     
+        String columnNames = "";
+        c = null;
+
+        try{
+            Class.forName("org.postgresql.Driver");
+            c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+        } catch(Exception e)
+        {
+            System.out.println("Failed to connect to database when loading data");
+            e.printStackTrace();
+        }
+
+        Scanner sin = new Scanner(System.in);
+        System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
+        String studentID = sin.nextLine();
+        System.out.print("\nWhat is the eval ID of the student you want to print?\nEval ID:");
+        String evalID = sin.nextLine();
+
+        try{
+            String queryString = "Select * from v_response where student2 = '" + studentID + "' and evalID = '" + evalID + "';";
+
+            //
+            //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
+            printView(query(queryString));
+            
+            }catch(Exception e){
+                System.out.print("Failed printSingleStudent");
+            }
+
+    }
+
+    public void printView(ResultSet rs)
+    {
+        try{
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) 
+            {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    if (i > 1) System.out.print(",  ");
+                        String columnValue = rs.getString(i);
+                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+    }
+    System.out.println("");
+}
+        }catch(Exception e)
+        {
+            System.out.println("Print View failed");
+        }
+    }
 
     public void v_response_print(ResultSet rs) {
 	System.out.println("evalid\tstudent1\tstudent2\tcategory\tvalue");
 	    try {
-	        while(rs.next()) {
+	        while(!rs.isLast()) {
 		    System.out.print(rs.getInt(1));
 		    System.out.print("\t");
 		    System.out.print(rs.getInt(2));
