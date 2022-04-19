@@ -91,18 +91,13 @@ public class PeerEval
         String [] options = 
         {
         "1. Load CSV",
-        "2. Print Report"
+        "2. Print Report",
+        "3. Exit"
         };
 
 
-        System.out.print("Please enter your credentials.\nUsername: ");
-        user = sin.nextLine();
-        System.out.print("\nPlease enter your password: ");
-        password = sin.nextLine();
-
-
         //begin menu
-        System.out.println("Welcome to Peer Eval\nWhat would you like to do? (Please select a number from the list)");
+        System.out.println("\n\nWelcome to Peer Eval\nWhat would you like to do? (Please select a number from the list)");
         
         //print all program options
         for(String var : options)
@@ -111,7 +106,7 @@ public class PeerEval
         }
 
         String userResponse = "";
-        System.out.print("\nSelection: ");
+        System.out.print("\nSelection Number: ");
         userResponse = sin.nextLine();
 
         //Switch on what option user inputted 
@@ -129,8 +124,14 @@ public class PeerEval
                 System.out.println("(Print Report)");
                 pe.printReportMenu();
                 break;
+
+            case "3.":
+            case "3":
+                System.out.println("(Exit)");
+                break;
             default: 
                 System.out.println("Option not found");
+                adminMenu();
                 break;
         }
      }
@@ -214,6 +215,12 @@ public class PeerEval
             query = query.substring(0, query.length() -1);
             //System.out.println(query);
             pe.nonquery(query);
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println(fileName + " loaded successfully into " + tableName);
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            
+            //System.out.println("Is there anything else you would like to do?");
+            //pe.adminMenu();
         } 
         catch(Exception e){
             System.out.println("load data failed");
@@ -314,7 +321,9 @@ public class PeerEval
         String [] options = 
         {
         "1. Student Report (By Student ID)",
-        "2. Class Report (By Eval ID)"
+        "2. Class Report (By Eval ID)",
+        "3. Go Back",
+        "4. Exit"
         };
 
 
@@ -328,7 +337,7 @@ public class PeerEval
         System.out.print("\nOption selected: ");
 
         String userResponse = "";
-        System.out.print("\nSelection: ");
+        System.out.print("\nSelection Number: ");
         userResponse = sin.nextLine();
 
         //Switch on what option user inputted 
@@ -344,10 +353,20 @@ public class PeerEval
             case "2.":
             case "2":
                 System.out.println("(Class Report)");
-                
                 break;
+            case "3.":
+            case "3":
+                System.out.println("(Go Back)");
+                adminMenu();
+                break;
+            case "4.":
+            case "4":
+                System.out.println("(Exit)");
+                break;
+
             default: 
                 System.out.println("Option not found");
+                printReportMenu();
                 break;
         }     
     }
@@ -360,7 +379,9 @@ public class PeerEval
         {
         "1. Single Student Report (Student ID and EvalID)",
         "2. All Student's Reports (Student ID)",
-        "3. All Student Reports with overall Stats (Student ID)"
+        "3. All Student Reports with overall Stats (Student ID)",
+        "4. Go Back",
+        "5. Exit"
         };
 
 
@@ -373,7 +394,7 @@ public class PeerEval
         System.out.print("\nOption selected: ");
 
         String userResponse = "";
-        System.out.print("\nSelection: ");
+        System.out.print("\nSelection Number: ");
         userResponse = sin.nextLine();
         
         //Switch on what option user inputted 
@@ -384,21 +405,33 @@ public class PeerEval
             case "1.": 
             case "1": 
                 System.out.println("(Single Student Report)");
-                printSingleStudent();
-                
+                printSingleStudent();               
                 break;
+
             case "2.":
             case "2":
                 System.out.println("(All Student's Reports)");
-
                 break;
+
             case "3.":
             case "3":
                 System.out.println("(All Student's Reports with overall Stats)");
-
                 break;
+
+            case "4.":
+            case "4":
+                System.out.println("(Go Back)");
+                printReportMenu();
+                break;
+
+            case "5.":
+            case"5":
+                System.out.println("(Exit)");
+                break;
+
             default: 
                 System.out.println("Option not found");
+                printStudentMenu();
                 break;
         } 
     }
