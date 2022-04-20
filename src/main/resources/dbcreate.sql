@@ -393,17 +393,17 @@ order by r.evalid, r.student1, r.student2, r.category;
 
 CREATE VIEW v_stuAvg AS 
 SELECT eval, team, s2, count(v) n, avg(v) avg 
-FROM v_response_team where team < 3 
+FROM v_response_team
 group by eval, team, s2 order by team, s2;
 
 CREATE VIEW v_stuAvgNoSelf AS
 SELECT eval, team, s2, count(v) n, avg(v) avg 
 FROM v_response_team where s1 != s2 
-and team < 3 group by eval, team, s2 order by team, s2;
+group by eval, team, s2 order by team, s2;
 
 CREATE VIEW v_average AS 
 SELECT eval, team, s1, s2, json_agg(json_build_object('cat',cat, 'v',v)) 
-FROM v_response_team where team < 3 group by eval, team, s1, s2 order by eval, s1, s2 
+FROM v_response_team group by eval, team, s1, s2 order by eval, s1, s2 
 limit 10;
 
 
