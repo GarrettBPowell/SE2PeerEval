@@ -56,6 +56,7 @@ public class PeerEval
      public void logon()
      {       
         Scanner sin = new Scanner(System.in);
+        boolean correctLogOn = false;
         //list of program options that will be outputted and then switched on based on user input
         String [] options = 
         {
@@ -63,25 +64,33 @@ public class PeerEval
         "2. Print Report"
         };
 
-
-        System.out.print("Please enter your credentials.\nUsername: ");
-        user = sin.nextLine();
-        System.out.print("\nPlease enter your password: ");
-        password = sin.nextLine();
-
-        try{
-            connect(url, user, password);
-
-            //if can logon Currently just runs admin menu
-            adminMenu();
-        }
-        catch (Exception e)
+        while(!correctLogOn)
         {
-            System.out.println("*************************************************");
-            System.out.println("Incorrect Username or Password. Please try again.");
-            System.out.println("*************************************************");
-            pe.logon();
+            System.out.print("Please enter your credentials.\nUsername: ");
+            user = sin.nextLine();
+            System.out.print("\nPlease enter your password: ");
+            password = sin.nextLine();
+
+            try{
+                connect(url, user, password);
+                if(c != null)
+                    correctLogOn = true;
+                else
+                {
+                    System.out.println("*************************************************");
+                    System.out.println("Incorrect Username or Password. Please try again.");
+                    System.out.println("*************************************************");
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("*************************************************");
+                System.out.println("Incorrect Username or Password. Please try again.");
+                System.out.println("*************************************************");
+            }
         }
+
+        adminMenu();
      }
 
      public void adminMenu()
@@ -245,7 +254,7 @@ public class PeerEval
         catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
+            c = null;
         }
         return c;
     }
