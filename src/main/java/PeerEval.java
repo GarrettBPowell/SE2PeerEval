@@ -16,7 +16,8 @@ import java.util.*;
 import java.util.Scanner;
 import java.io.*;
 
-
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 /***********************************
 *	Authors: Christa Greenwood, Garrett Powell, Megan Skeen
@@ -426,6 +427,7 @@ public class PeerEval
             case "2.":
             case "2":
                 System.out.println("(All Student's Reports)");
+                createHTML();
                 break;
 
             case "3.":
@@ -527,5 +529,24 @@ public class PeerEval
 	        System.out.println("v_response_print not happy");
 	        exec.printStackTrace();
 	    }
+    }
+
+    public void createHTML()
+    {
+        System.out.println("About to create the HTML file...");
+
+        String html = "<div>Try writing it the html...</div>";
+        //File f = new File("C:\\Users\\Chicky Nuggy\\Documents\\ACU\\Software Engineering II\\SE2PeerEval\\test.html");
+        File f = new File("src/main/html/test.html");
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write(html);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Created the HTML file.");
     }
 }
