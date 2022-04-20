@@ -481,7 +481,8 @@ public class PeerEval
 
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
-            printResultSet(query(queryString));
+            //printResultSet(query(queryString));
+            createHTMLResult(query(queryString));
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
@@ -536,7 +537,52 @@ public class PeerEval
         System.out.println("About to create the HTML file...");
 
         String html = "<div>Try writing it the html...</div>";
-        //File f = new File("C:\\Users\\Chicky Nuggy\\Documents\\ACU\\Software Engineering II\\SE2PeerEval\\test.html");
+        File f = new File("src/main/html/test.html");
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write(html);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Created the HTML file.");
+    }
+
+    public void createHTMLResult(ResultSet rs)
+    {
+        System.out.println("About to create the HTML file...");
+        String html = "<!DOCTYPE html><html><head><style>body { background-color: #D2CAE6;" +
+        "font-family: Arial, Helvetica, sans-serif;}h1 { text-align: center;text-decoration-line: underline;" +
+        "text-decoration-thickness: 2px;text-transform: uppercase;" +
+        "font-family: " + "Lucida Console" + ", " + "Courier New" + ", monospace;color: #56476C;}table {" +
+        "border-collapse: collapse;width: 100%;}th, td {padding: 8px;text-align: left;" +
+        "border-bottom: 1px solid #E0D5F5;}tr:hover {background-color: #8569BD;}</style>" +
+        "</head><body><h1>Report</h1><table><tr>";
+
+        try{
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) 
+            {
+                for (int i = 1; i <= columnsNumber; i++) 
+                {
+                    if (i > 1) System.out.print(" ");
+                        String columnValue = rs.getString(i);
+                    html += "<td>" + columnValue + "</td>";
+                }
+                System.out.println("");
+                html += "</tr><tr>";
+            }
+
+            html += "</table></body></html>";
+        }
+        catch(Exception e)
+        {
+            System.out.println("Print View failed");
+        }
+
         File f = new File("src/main/html/test.html");
         
         try {
