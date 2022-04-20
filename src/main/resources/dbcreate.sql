@@ -406,6 +406,22 @@ SELECT eval, team, s1, s2, json_agg(json_build_object('cat',cat, 'v',v))
 FROM v_response_team group by eval, team, s1, s2 order by eval, s1, s2 
 limit 10;
 
+CREATE VIEW teachAnon AS 
+SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v))
+FROM v_response_team group by eval, team; 
+
+CREATE VIEW teachRaw AS 
+SELECT eval, team, s1, s2, json_agg(json_build_object('cat',cat,'v',v))
+FROM v_response_team group by eval, team, s1, s2; /*these two likely don't do what I hope they'll do. need to go through the databases to make sure I'm taking the right things */
+
+CREATE VIEW stuAnon AS 
+SELECT eval, s1, json_agg(json_build_object('cat',cat, 'v', v))
+FROM v_response_team group by eval, s1; 
+
+CREATE VIEW stuLife AS 
+SELECT eval, s1, json_agg(json_build_object('cat',cat, 'v',v))
+FROM 
+
 
 GRANT ALL on category to mrblee;
 GRANT ALL on response to mrblee;
