@@ -142,33 +142,39 @@ public class PeerEval
      {
         Scanner sin = new Scanner(System.in);
         System.out.println("Make sure the file you are wanting to input has been placed in the resources file of this project. \nThis is located at filepath: src/main/resources\n");
-        System.out.print("What is the exact name of the csv file you are wanting to read from? (Do not include .csv)\nFile name:");
+       
 
-        String fileName = sin.nextLine();
-        
-        //check to make sure file is there before moving on
-        try{
+        boolean correctFileName = false;
+        String fileName = "";
+         String tableName = "";
 
-            loadFile(fileName);
-        }
-        catch(Exception e)
+        //keep looping till valid file name is given
+        while(!correctFileName)
         {
-            System.out.println("************************************");
-            System.out.println("A file by that name was not found.\n");
-            System.out.println("************************************");
-            loadFileMenu();
+            System.out.print("What is the exact name of the csv file you are wanting to read from? (Do not include .csv)\nFile name:");
+
+            fileName = sin.nextLine();
+        
+            //check to make sure file is there before moving on
+            try{
+
+                loadFile(fileName);
+                correctFileName = true;
+            }
+            catch(Exception e)
+            {
+                System.out.println("************************************");
+                System.out.println("A file by that name was not found.\n");
+                System.out.println("************************************");
+            
+            }
         }
-
-
-        System.out.print("What is the name of the table this file is being input into?\nTable name:");
-        String tableName = "";
-        tableName = sin.nextLine();
+    
+        tableName = "response";
 
         //try loading file into table
-        try{
-        //
-        //Potentially try to connect to table before attempting to load
-        //
+        try
+        {
             loadData(fileName, tableName);
         }
         catch(Exception e)
@@ -176,8 +182,8 @@ public class PeerEval
             System.out.println("************************************");
             System.out.println("A table by that name was not found.\n");
             System.out.println("************************************");
-            loadFileMenu();
-        }
+                
+        }   
      }
 
 
