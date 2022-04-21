@@ -261,7 +261,7 @@ public class PeerEval
     }
 
 
-    //loads a file given the filename
+    //loads a csv file given the filename
     public Scanner loadFile(final String fileName) 
     {
         //scanner for reading file
@@ -269,6 +269,27 @@ public class PeerEval
         try{
             //
             File fullFile = new File("src/main/resources/" + fileName + ".csv");
+
+            s = new Scanner(fullFile);
+        } 
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            throw new IllegalArgumentException(fileName + " is not found");
+        }
+        //this.getClass().getClassLoader().getResourceAsStream("..\\..\\resources\\" +fileName);
+        
+        return s;
+    }
+
+    //loads an html file given the filename
+    public Scanner loadFileHTML(final String fileName) 
+    {
+        //scanner for reading file
+        Scanner s;
+        try{
+            //
+            File fullFile = new File("src/main/html/" + fileName + ".html");
 
             s = new Scanner(fullFile);
         } 
@@ -552,7 +573,6 @@ public class PeerEval
 
     public void createHTMLResult(ResultSet rs)
     {
-        System.out.println("About to create the HTML file...");
         String html = "<!DOCTYPE html><html><head><style>body { background-color: #D2CAE6;" +
         "font-family: Arial, Helvetica, sans-serif;}h1 { text-align: center;text-decoration-line: underline;" +
         "text-decoration-thickness: 2px;text-transform: uppercase;" +
@@ -592,7 +612,5 @@ public class PeerEval
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Created the HTML file.");
     }
 }
