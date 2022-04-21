@@ -1,0 +1,9 @@
+public class Admin extends User
+{
+	public void displayOptions()
+	{
+		System.out.println("1. Display class evaluations");
+		System.out.println("2. Display single student evaluation");
+		System.out.println("3. Display school evaluation stats");
+	}
+}

@@ -1,0 +1,8 @@
+public class Student extends User
+{
+	public void displayOptions()
+	{
+		System.out.println("1. Display most recent evaluation");
+		System.out.println("2. Display all evaluations");
+	}
+}
