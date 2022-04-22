@@ -1074,7 +1074,7 @@ public class PeerEvalTest
 
     //this tests the the input steam opens with given file name
     @Test
-    public void java_ReadHTML()
+    public void html_ReadHTML()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
@@ -1102,7 +1102,7 @@ public class PeerEvalTest
 
     //this tests the html put into the test html file
     @Test
-    public void java_getHTMLData()
+    public void html_getHTMLData()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
@@ -1132,7 +1132,7 @@ public class PeerEvalTest
 
     //this tests that the file contains the correct header
     @Test
-    public void java_getHTMLHeader()
+    public void html_getHTMLHeader()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
@@ -1161,7 +1161,7 @@ public class PeerEvalTest
 
     //this tests that the file contains the correct table row
     @Test
-    public void java_getHTMLRow()
+    public void html_getHTMLRow()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
@@ -1190,7 +1190,7 @@ public class PeerEvalTest
 
     //this tests that the file contains the correct table data
     @Test
-    public void java_getHTMLDataPiece1()
+    public void html_getHTMLDataPiece1()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
@@ -1219,11 +1219,12 @@ public class PeerEvalTest
 
     //this tests that the file contains the correct table data
     @Test
-    public void java_getHTMLDataPiece2()
+    public void html_getHTMLDataPiece2()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
-        "<table><tr>Sample Data</tr><td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
+        "<table><tr>Sample Data1</tr><tr>Sample Data2</tr><tr>Sample Data3</tr><tr>Sample Data4</tr>" +
+        "<td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
         "<td>Sample Data Piece3</td><td>Sample Data Piece4</td></table></body></html>";
 
         File f = new File("src/main/html/test.html");
@@ -1249,11 +1250,12 @@ public class PeerEvalTest
 
     //this tests that the file contains <!DOCTYPE html><html>
     @Test
-    public void java_getHTMLdoctype()
+    public void html_getHTMLdoctype()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
-        "<table><tr>Sample Data</tr><td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
+        "<table><tr>Sample Data1</tr><tr>Sample Data2</tr><tr>Sample Data3</tr><tr>Sample Data4</tr>" +
+        "<td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
         "<td>Sample Data Piece3</td><td>Sample Data Piece4</td></table></body></html>";
 
         File f = new File("src/main/html/test.html");
@@ -1279,11 +1281,12 @@ public class PeerEvalTest
 
     //this tests that the file contains a closing html tag
     @Test
-    public void java_getHTMLTag()
+    public void html_getHTMLTag()
     {
 
         String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
-        "<table><tr>Sample Data</tr><td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
+        "<table><tr>Sample Data1</tr><tr>Sample Data2</tr><tr>Sample Data3</tr><tr>Sample Data4</tr>" +
+        "<td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
         "<td>Sample Data Piece3</td><td>Sample Data Piece4</td></table></body></html>";
 
         File f = new File("src/main/html/test.html");
@@ -1306,4 +1309,66 @@ public class PeerEvalTest
             System.out.println("Read HTML failed");
         }
     } 
+
+    //this tests that the file contains a head section
+    @Test
+    public void html_getHTMLDataPiece3()
+    {
+
+        String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
+        "<table><tr>Sample Data1</tr><tr>Sample Data2</tr><tr>Sample Data3</tr><tr>Sample Data4</tr>" +
+        "<td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
+        "<td>Sample Data Piece3</td><td>Sample Data Piece4</td></table></body></html>";
+
+        File f = new File("src/main/html/test.html");
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write(html);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try{  
+            PeerEval test = new PeerEval();
+            Scanner s = test.loadFileHTML("test");
+            String data = s.nextLine();
+            assertEquals(data.contains("<head></head>"), true);
+                }
+        catch(Exception e){
+            System.out.println("Read HTML failed");
+        }
+    }
+
+    //this tests that the file contains a body section
+    @Test
+    public void html_getHTMLDataPiece4()
+    {
+
+        String html = "<!DOCTYPE html><html><head></head><body><h1>Test HTML File</h1>" +
+        "<table><tr>Sample Data1</tr><tr>Sample Data2</tr><tr>Sample Data3</tr><tr>Sample Data4</tr>" +
+        "<td>Sample Data Piece1</td><td>Sample Data Piece2</td>" +
+        "<td>Sample Data Piece3</td><td>Sample Data Piece4</td></table></body></html>";
+
+        File f = new File("src/main/html/test.html");
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write(html);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try{  
+            PeerEval test = new PeerEval();
+            Scanner s = test.loadFileHTML("test");
+            String data = s.nextLine();
+            assertEquals(data.contains("<body>"), true);
+                }
+        catch(Exception e){
+            System.out.println("Read HTML failed");
+        }
+    }
 }
