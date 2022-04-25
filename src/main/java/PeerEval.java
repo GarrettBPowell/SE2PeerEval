@@ -390,6 +390,7 @@ public class PeerEval
             case "2.":
             case "2":
                 System.out.println("(Class Report)");
+                printClassReport();
                 break;
             case "3.":
             case "3":
@@ -407,6 +408,41 @@ public class PeerEval
                 break;
         }     
     }
+
+    //prints a single student for a single evalid
+    public void printClassReport()
+    {
+     
+        String columnNames = "";
+        c = null;
+
+        try{
+            Class.forName("org.postgresql.Driver");
+            c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+        } catch(Exception e)
+        {
+            System.out.println("Failed to connect to database when loading data");
+            e.printStackTrace();
+        }
+
+        Scanner sin = new Scanner(System.in);
+        System.out.print("\nWhat is the class ID?\nClass ID: ");
+        String classID = sin.nextLine();
+
+        try{
+            //String queryString = "Select * from v_response where student2 = '" + classID;
+
+            //
+            //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
+            //printResultSet(query(queryString));
+            //createHTMLResult(query(queryString));
+            
+        }catch(Exception e){
+                System.out.print("Failed printAllStudentResponsesStats");
+            }
+    }
+
+
 
     //displays menu for when student is selected in the print report screen
     public void printStudentMenu()
@@ -448,12 +484,14 @@ public class PeerEval
             case "2.":
             case "2":
                 System.out.println("(All Student's Reports)");
-                createHTML();
+                printAllStudentResponses();
+                //createHTML();
                 break;
 
             case "3.":
             case "3":
                 System.out.println("(All Student's Reports with overall Stats)");
+                printAllStudentResponsesStats();
                 break;
 
             case "4.":
@@ -509,6 +547,72 @@ public class PeerEval
                 System.out.print("Failed printSingleStudent");
             }
 
+    }
+
+    //prints a single student for a single evalid
+    public void printAllStudentResponses()
+    {
+     
+        String columnNames = "";
+        c = null;
+
+        try{
+            Class.forName("org.postgresql.Driver");
+            c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+        } catch(Exception e)
+        {
+            System.out.println("Failed to connect to database when loading data");
+            e.printStackTrace();
+        }
+
+        Scanner sin = new Scanner(System.in);
+        System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
+        String studentID = sin.nextLine();
+
+        try{
+            String queryString = "Select * from v_response where student2 = '" + studentID;
+
+            //
+            //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
+            //printResultSet(query(queryString));
+            createHTMLResult(query(queryString));
+            
+            }catch(Exception e){
+                System.out.print("Failed printAllStudentResponses");
+            }
+    }
+
+    //prints a single student for a single evalid
+    public void printAllStudentResponsesStats()
+    {
+     
+        String columnNames = "";
+        c = null;
+
+        try{
+            Class.forName("org.postgresql.Driver");
+            c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+        } catch(Exception e)
+        {
+            System.out.println("Failed to connect to database when loading data");
+            e.printStackTrace();
+        }
+
+        Scanner sin = new Scanner(System.in);
+        System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
+        String studentID = sin.nextLine();
+
+        try{
+            String queryString = "Select * from v_response where student2 = '" + studentID;
+
+            //
+            //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
+            //printResultSet(query(queryString));
+            createHTMLResult(query(queryString));
+            
+        }catch(Exception e){
+                System.out.print("Failed printAllStudentResponsesStats");
+            }
     }
 
     //prints a given result set entirely

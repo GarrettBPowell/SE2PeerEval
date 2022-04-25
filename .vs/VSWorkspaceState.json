@@ -3,12 +3,12 @@
     "",
     "\\src",
     "\\src\\main",
+    "\\src\\main\\html",
     "\\src\\main\\java",
     "\\src\\main\\java\\Classes",
     "\\src\\main\\resources",
     "\\src\\test",
     "\\src\\test\\java"
   ],
-  "SelectedNode": "\\src\\main\\java\\Classes",
   "PreviewInSolutionExplorer": false
 }
