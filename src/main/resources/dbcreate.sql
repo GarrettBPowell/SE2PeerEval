@@ -4,7 +4,7 @@ CREATE DATABASE cs375v1 encoding 'UTF-8';
 \c cs375v1;
 
 -- Creates category table
-drop table if exists category;
+drop table if exists category cascade;
 CREATE TABLE category (
 id char primary key,
 text text,
@@ -24,7 +24,7 @@ insert into category(id, text, category_type) values
 --select * from category;
 
 -- Creates response table
-drop table if exists response;
+drop table if exists response cascade;
 CREATE TABLE response (
 evalid int,
 student1 int,
@@ -311,7 +311,7 @@ insert into response (evalid, student1, student2, category, value) values (1, 15
 
 
 -- Creates team table
-drop table if exists team;
+drop table if exists team cascade;
 CREATE TABLE team (
 evalid int,
 teamid int,
@@ -345,7 +345,7 @@ insert into team(evalid, teamid, student) values
 
 
 -- Creates student table
-drop table if exists student;
+drop table if exists student cascade;
 CREATE TABLE student (
 id int,
 name text
@@ -375,6 +375,7 @@ insert into student (id, name) values ( 19, 'StudentS');
 -- Displays all students
 --select * from student;
 
+--Create class table 
 
 CREATE VIEW v_response AS
 SELECT evalid as evalid, student1 as student1, student2 as student2, category as category, value as value
@@ -405,6 +406,33 @@ CREATE VIEW v_average AS
 SELECT eval, team, s1, s2, json_agg(json_build_object('cat',cat, 'v',v)) 
 FROM v_response_team group by eval, team, s1, s2 order by eval, s1, s2 
 limit 10;
+
+/*
+1. Teacher view with anonymized data to show to class (teacher can only see their class).
+
+2. Teacher view with raw (not anonymized) data.
+
+3. Student view for a specific student with anonymized data.
+
+4. Student lifetime view with anonymized data (data across classes).
+
+5. Student view for team statistics.
+
+6. Admin view with raw (not anonymized) data that spans previous classes and includes roll-ups.
+*/
+
+CREATE VIEW teacherAnon AS 
+SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
+FROM v_response_team  group by eval, team order by eval; 
+
+CREATE VIEW teacherAll AS 
+SELECT *
+FROM v_response_team; 
+
+--CREATE VIEW studentImmediate AS 
+--SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
+--FROM v_response_team 
+--WHERE s1 = 
 
 
 GRANT ALL on category to mrblee;
