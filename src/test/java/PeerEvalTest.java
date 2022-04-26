@@ -689,67 +689,72 @@ public class PeerEvalTest
     //checks averages in value column of response table
     @Test
     public void sql_check_valAvg () {
-	float n = -1;
-
-	response_inserts();
-	n = avg_rows("response", "value");
+	    float n = -1;
+        delete_con("response", "where evailID = '999'");
+	    response_inserts();
+	    n = avg_rows("response", "value");
 
     
-	try{ 
+	    try{ 
            assertEquals(n, 3.0, 0.001);
            delete_con("response", "value");
                 }
         catch(Exception e){
             System.out.println("Average value failed");
         }
+        delete_con("response", "where evailID = '999'");
     }
 
     //counts rows with category C
     @Test
     public void sql_count_categoriesC () {
-    delete_con("response", "where category = 'C'");
-	int n = -1;
+        delete_con("response", "where evailID = '999'");
+	    int n = -1;
 
-	response_inserts();
-	n = count_rows_con("response", "where category = 'C'");
-	assertTrue(n == 2);
-    delete_con("response", "where category = 'C'");
+	    response_inserts();
+	    n = count_rows_con("response", "where category = 'C'");
+	    assertTrue(n == 2);
+        delete_con("response", "where evailID = '999'");
     }
 
     //counts rows with category H
     @Test
     public void sql_count_categoriesH () {
-    delete_con("response", "where category = 'H'");
-	int n = -1;
+        delete_con("response", "where category = 'H'");
+	    int n = -1;
 
-	response_inserts();
-	n = count_rows_con("response", "where category = 'H'");
-	assertTrue(n == 2);
-    delete_con("response", "where category = 'H'");
+	    response_inserts();
+	    n = count_rows_con("response", "where category = 'H'");
+	    assertTrue(n == 2);
+        delete_con("response", "where category = 'H'");
     }
 
     //counts rows with student2 = 2
     @Test
     public void sql_count_student2s2 () {
-    delete_con("response", "where student2 = '2'");
-	int n = -1;
+   
+	    int n = -1;
+        delete_con("response", "where evailID = '999'");
+	    response_inserts();
+	    n = count_rows_con("response", "where student2 = '2' and evalID = '999'");
+	    assertEquals(5, n);
 
-	response_inserts();
-	n = count_rows_con("response", "where student2 = '2'");
-	assertTrue(n == 5);
-    delete_con("response", "where student2 = '2'");
+        delete_con("response", "where evailID = '999'");
+   
     }
 
     //counts rows with student2 = 3
     @Test
     public void sql_count_student2s3 () {
-    delete_con("response", "where student2 = '3'");
-	int n = -1;
+     
+	    int n = -1;
+        delete_con("response", "where evailID = '999'");
+	    response_inserts();
 
-	response_inserts();
-	n = count_rows_con("response", "where student2 = '3'");
-	assertTrue(n == 5);
-    delete_con("response", "where student2 = '3'");
+	    n = count_rows_con("response", "where student2 = '3' and evalID = '999'");
+	    assertEquals(5, n);
+        delete_con("response", "where evailID = '999'");
+     
     }
 
     //-----------------------------------------------------------------------
