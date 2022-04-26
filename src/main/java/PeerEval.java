@@ -582,7 +582,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename);
+            createHTMLResult(query(queryString), htmlFilename, 1);
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
@@ -618,7 +618,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename);
+            createHTMLResult(query(queryString), htmlFilename, 1);
             
             }catch(Exception e){
                 System.out.print("Failed printAllStudentResponses");
@@ -653,7 +653,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename);
+            createHTMLResult(query(queryString), htmlFilename, 1);
             
         }catch(Exception e){
                 System.out.print("Failed printAllStudentResponsesStats");
@@ -720,15 +720,22 @@ public class PeerEval
         System.out.println("Created the HTML file.");
     }
 
-    public void createHTMLResult(ResultSet rs, String htmlFilename)
+    public void createHTMLResult(ResultSet rs, String htmlFilename, int reportType)
     {
+        String htmlHeader = "";
+        switch (reportType){
+            case 1:
+                htmlHeader = "Student View";
+                break;
+        }
+
         String html = "<!DOCTYPE html><html><head><style>body { background-color: #D2CAE6;" +
         "font-family: Arial, Helvetica, sans-serif;}h1 { text-align: center;text-decoration-line: underline;" +
         "text-decoration-thickness: 2px;text-transform: uppercase;" +
         "font-family: " + "Lucida Console" + ", " + "Courier New" + ", monospace;color: #56476C;}table {" +
         "border-collapse: collapse;width: 100%;}th, td {padding: 8px;text-align: left;" +
         "border-bottom: 1px solid #E0D5F5;}tr:hover {background-color: #8569BD;}</style>" +
-        "</head><body><h1>Report</h1><table><tr>";
+        "</head><body><h1>" + htmlHeader + "</h1><table><tr>";
 
         try{
             ResultSetMetaData rsmd = rs.getMetaData();
