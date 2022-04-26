@@ -568,6 +568,7 @@ public class PeerEval
     }
 
 
+    //HTML PRINT
     //prints a single student for a single evalid
     public void printSingleStudent()
     {
@@ -606,7 +607,8 @@ public class PeerEval
 
     }
 
-    //prints a single student for a single evalid
+    //HTML PRINT
+    //Prints the stats of a specifc student for a specifc team/evalid
     public void teamStats()
     {
      
@@ -641,6 +643,7 @@ public class PeerEval
             }
     }
 
+    //HTML PRINT
     //prints a single student for a single evalid
     public void printAllStudentResponsesStats()
     {
