@@ -467,8 +467,17 @@ public class PeerEval
         Scanner sin = new Scanner(System.in);
         System.out.print("\nWhat is the class ID?\nClass ID: ");
         String classID = sin.nextLine();
+        System.out.print("\nWould you like the data anonymized?\nY/N: ");
+        String anonymized = sin.nextLine();
 
         try{
+            //if ((anonymized == "Y") || (anonymized == "y")){
+            if (anonymized.equals("Y") || anonymized.equals("y")){
+                System.out.println("Printed Anonymized Class Report");
+            }
+            else{
+                System.out.println("Printed Class Report");
+            }
             //String queryString = "Select * from v_response where student2 = '" + classID;
 
             //
