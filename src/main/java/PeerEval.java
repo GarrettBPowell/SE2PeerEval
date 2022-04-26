@@ -570,7 +570,7 @@ public class PeerEval
         String studentID = sin.nextLine();
 
         try{
-            String queryString = "Select * from v_response where student2 = '" + studentID;
+            String queryString = "Select * from v_response where student2 = '" + studentID + "';";
 
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
@@ -603,7 +603,7 @@ public class PeerEval
         String studentID = sin.nextLine();
 
         try{
-            String queryString = "Select * from v_response where student2 = '" + studentID;
+            String queryString = "Select * from v_response where student2 = '" + studentID + "';";
 
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");

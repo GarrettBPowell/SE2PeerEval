@@ -303,7 +303,7 @@ public class PeerEvalTest
     public void java_ReadWordFive()
     {
         PeerEval test = new PeerEval();
-        Scanner s = test.loadFile("response");\
+        Scanner s = test.loadFile("response");
 
         try{  
         //get first line and turn into an array
