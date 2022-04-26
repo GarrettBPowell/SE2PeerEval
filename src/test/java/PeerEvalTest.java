@@ -690,7 +690,7 @@ public class PeerEvalTest
     @Test
     public void sql_check_valAvg () {
 	    float n = -1;
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
 	    response_inserts();
 	    n = avg_rows("response", "value");
 
@@ -702,19 +702,19 @@ public class PeerEvalTest
         catch(Exception e){
             System.out.println("Average value failed");
         }
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
     }
 
     //counts rows with category C
     @Test
     public void sql_count_categoriesC () {
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
 	    int n = -1;
 
 	    response_inserts();
 	    n = count_rows_con("response", "where category = 'C'");
 	    assertTrue(n == 2);
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
     }
 
     //counts rows with category H
@@ -734,12 +734,12 @@ public class PeerEvalTest
     public void sql_count_student2s2 () {
    
 	    int n = -1;
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
 	    response_inserts();
 	    n = count_rows_con("response", "where student2 = '2' and evalID = '999'");
 	    assertEquals(5, n);
 
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
    
     }
 
@@ -748,12 +748,12 @@ public class PeerEvalTest
     public void sql_count_student2s3 () {
      
 	    int n = -1;
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
 	    response_inserts();
 
 	    n = count_rows_con("response", "where student2 = '3' and evalID = '999'");
 	    assertEquals(5, n);
-        delete_con("response", "where evailID = '999'");
+        delete_con("response", "where evalID = '999'");
      
     }
 
