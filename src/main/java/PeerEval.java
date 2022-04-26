@@ -733,6 +733,17 @@ public class PeerEval
         try{
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
+
+            // puts table headers for each column in html String
+            for (int i = 1; i <= columnsNumber; i++) 
+                {
+                    if (i > 1) System.out.print(" ");
+                        String columnName = rsmd.getColumnName(i);
+                    html += "<th>" + columnName + "</th>";
+                }
+                html += "</tr><tr>";
+
+            // puts all data in html String
             while (rs.next()) 
             {
                 for (int i = 1; i <= columnsNumber; i++) 
@@ -752,10 +763,11 @@ public class PeerEval
             System.out.println("Print View failed");
         }
 
+        // creates HTML file
         File f = new File("src/main/html/" + htmlFilename + ".html");
-        //File f = new File("src/main/html/test.html");
         
         try {
+            // writes data in html String to HTML file
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(html);
             bw.close();
