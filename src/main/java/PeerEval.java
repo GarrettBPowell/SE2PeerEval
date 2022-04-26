@@ -534,6 +534,8 @@ public class PeerEval
         String studentID = sin.nextLine();
         System.out.print("\nWhat is the eval ID of the student you want to print?\nEval ID:");
         String evalID = sin.nextLine();
+        System.out.print("\nWhat should the output file be named?\nFilename:");
+        String htmlFilename = sin.nextLine();
 
         try{
             String queryString = "Select * from v_response where student2 = '" + studentID + "' and evalID = '" + evalID + "';";
@@ -541,7 +543,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString));
+            createHTMLResult(query(queryString), htmlFilename);
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
@@ -568,6 +570,8 @@ public class PeerEval
         Scanner sin = new Scanner(System.in);
         System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
         String studentID = sin.nextLine();
+        System.out.print("\nWhat should the output file be named?\nFilename:");
+        String htmlFilename = sin.nextLine();
 
         try{
             String queryString = "Select * from v_response where student2 = '" + studentID + "';";
@@ -575,7 +579,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString));
+            createHTMLResult(query(queryString), htmlFilename);
             
             }catch(Exception e){
                 System.out.print("Failed printAllStudentResponses");
@@ -601,6 +605,8 @@ public class PeerEval
         Scanner sin = new Scanner(System.in);
         System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
         String studentID = sin.nextLine();
+        System.out.print("\nWhat should the output file be named?\nFilename:");
+        String htmlFilename = sin.nextLine();
 
         try{
             String queryString = "Select * from v_response where student2 = '" + studentID + "';";
@@ -608,7 +614,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString));
+            createHTMLResult(query(queryString), htmlFilename);
             
         }catch(Exception e){
                 System.out.print("Failed printAllStudentResponsesStats");
@@ -675,7 +681,7 @@ public class PeerEval
         System.out.println("Created the HTML file.");
     }
 
-    public void createHTMLResult(ResultSet rs)
+    public void createHTMLResult(ResultSet rs, String htmlFilename)
     {
         String html = "<!DOCTYPE html><html><head><style>body { background-color: #D2CAE6;" +
         "font-family: Arial, Helvetica, sans-serif;}h1 { text-align: center;text-decoration-line: underline;" +
@@ -707,7 +713,8 @@ public class PeerEval
             System.out.println("Print View failed");
         }
 
-        File f = new File("src/main/html/test.html");
+        File f = new File("src/main/html/" + htmlFilename + ".html");
+        //File f = new File("src/main/html/test.html");
         
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
