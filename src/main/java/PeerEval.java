@@ -356,8 +356,8 @@ public class PeerEval
         Scanner sin = new Scanner(System.in);
         String [] options = 
         {
-        "1. Student Report (By Student ID)",
-        "2. Class Report (By Eval ID)",
+        "1. Student View",
+        "2. Teacher View",
         "3. Admin View",
         "4. Go Back",
         "5. Exit"
@@ -384,12 +384,12 @@ public class PeerEval
         {
             case "1.": 
             case "1": 
-                System.out.println("(Student Report)");
+                System.out.println("(Student View)");
                 printStudentMenu();
                 break;
             case "2.":
             case "2":
-                System.out.println("(Class Report)");
+                System.out.println("(Teacher View)");
                 printClassReport();
                 break;
             case "3.":
@@ -416,6 +416,9 @@ public class PeerEval
         }     
     }
 
+    //HTML PRINJT
+    //Print the raw not anonymized data that spans previous classes
+    //
     public void printAdminView()
     {
         String columnNames = "";
@@ -448,10 +451,11 @@ public class PeerEval
             }
     }
 
-    //prints a single student for a single evalid
+    //HTML PRINT
+    //Print the view with anonymized data to show to class
+    //Teacher view with raw not naonymized data
     public void printClassReport()
-    {
-     
+    {     
         String columnNames = "";
         c = null;
 
@@ -492,14 +496,17 @@ public class PeerEval
 
 
 
-    //displays menu for when student is selected in the print report screen
+    //HTML PRINT
+    //Specific student with anonymized data
+    //Student Lifetime view with anonymized data
+    //Student view for team statistics
     public void printStudentMenu()
     {
         Scanner sin = new Scanner(System.in);
         String [] options = 
         {
         "1. Single Student Report (Student ID and EvalID)",
-        "2. All Student's Reports (Student ID)",
+        "2. Student Team Statistics (Student ID)",
         "3. All Student Reports with overall Stats (Student ID)",
         "4. Go Back",
         "5. Exit"
@@ -531,8 +538,8 @@ public class PeerEval
 
             case "2.":
             case "2":
-                System.out.println("(All Student's Reports)");
-                printAllStudentResponses();
+                System.out.println("(Student Team Statistics)");
+                teamStats();
                 //createHTML();
                 break;
 
@@ -600,7 +607,7 @@ public class PeerEval
     }
 
     //prints a single student for a single evalid
-    public void printAllStudentResponses()
+    public void teamStats()
     {
      
         String columnNames = "";
