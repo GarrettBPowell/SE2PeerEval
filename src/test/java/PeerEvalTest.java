@@ -697,7 +697,7 @@ public class PeerEvalTest
     
 	    try{ 
            assertEquals(n, 3.0, 0.001);
-           delete_con("response", "value");
+           delete_con("response", "where evalID = '999'");
                 }
         catch(Exception e){
             System.out.println("Average value failed");
@@ -712,21 +712,21 @@ public class PeerEvalTest
 	    int n = -1;
 
 	    response_inserts();
-	    n = count_rows_con("response", "where category = 'C'");
-	    assertTrue(n == 2);
+	    n = count_rows_con("response", "where category = 'C' and evalID = '999'");
+	    assertEquals(2, n);
         delete_con("response", "where evalID = '999'");
     }
 
     //counts rows with category H
     @Test
     public void sql_count_categoriesH () {
-        delete_con("response", "where category = 'H'");
+        delete_con("response", "where evalID = '999'");
 	    int n = -1;
 
 	    response_inserts();
-	    n = count_rows_con("response", "where category = 'H'");
-	    assertTrue(n == 2);
-        delete_con("response", "where category = 'H'");
+	    n = count_rows_con("response", "where category = 'H' and evalID = '999'");
+	    assertEquals(2, n);
+        delete_con("response", "where evalID = '999'");
     }
 
     //counts rows with student2 = 2
