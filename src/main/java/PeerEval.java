@@ -139,9 +139,9 @@ public class PeerEval
             case "3":
                 System.out.println("(Exit)");
                 break;
+
             default: 
                 System.out.println("Option not found");
-                adminMenu();
                 break;
         }
      }
@@ -253,8 +253,7 @@ public class PeerEval
             c = DriverManager.getConnection(url, userN, pass);
         } 
         catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
+           System.out.println("Credentials did not validate");
             c = null;
         }
         return c;
@@ -359,8 +358,9 @@ public class PeerEval
         {
         "1. Student Report (By Student ID)",
         "2. Class Report (By Eval ID)",
-        "3. Go Back",
-        "4. Exit"
+        "3. Admin View",
+        "4. Go Back",
+        "5. Exit"
         };
 
 
@@ -394,11 +394,18 @@ public class PeerEval
                 break;
             case "3.":
             case "3":
+                System.out.println("(Admin View)");
+                printAdminView();
+                break;
+
+            case "4.":
+            case "4":
                 System.out.println("(Go Back)");
                 adminMenu();
                 break;
-            case "4.":
-            case "4":
+            
+            case "5.":
+            case "5":
                 System.out.println("(Exit)");
                 break;
 
@@ -407,6 +414,38 @@ public class PeerEval
                 printReportMenu();
                 break;
         }     
+    }
+
+    public void printAdminView()
+    {
+        String columnNames = "";
+        c = null;
+
+        try{
+            Class.forName("org.postgresql.Driver");
+            c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
+        } catch(Exception e)
+        {
+            System.out.println("Failed to connect to database when printing admin");
+            e.printStackTrace();
+        }
+
+        Scanner sin = new Scanner(System.in);
+        System.out.print("\nAdmin View?\nAdmin ID: ");
+        String classID = sin.nextLine();
+
+        try{
+            System.out.println("Printed Admin");
+            //String queryString = "Select * from v_response where student2 = '" + classID;
+
+            //
+            //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
+            //printResultSet(query(queryString));
+            //createHTMLResult(query(queryString));
+            
+        }catch(Exception e){
+                System.out.print("Failed printAdminView");
+            }
     }
 
     //prints a single student for a single evalid
