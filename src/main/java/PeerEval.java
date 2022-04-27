@@ -434,7 +434,10 @@ public class PeerEval
         }
 
         Scanner sin = new Scanner(System.in);
-        System.out.print("\nAdmin View:");
+        System.out.print("\nAdmin View?\nAdmin ID: ");
+        String classID = sin.nextLine();
+        System.out.print("\nWhat should the output file be named?\nFilename:");
+        String htmlFilename = sin.nextLine();
 
         try{
         Double alltimeAvg = 0.0;
@@ -450,14 +453,14 @@ public class PeerEval
             }
 
             String[] stats = new String[1];
-            stats[0] = alltimeAvg.toString();
+            stats[0] = "Value Average: " + alltimeAvg.toString();
            
             //String queryString = "Select * from v_response where student2 = '" + classID;
-
+            queryString = "Select * from response";
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            //createHTMLResult(query(queryString));
+            createHTMLResult(query(queryString), htmlFilename, 2, false, stats);
             
         }catch(Exception e){
                 System.out.print("Failed printAdminView");
@@ -623,18 +626,22 @@ public class PeerEval
         Scanner sin = new Scanner(System.in);
         System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
         String studentID = sin.nextLine();
+        System.out.print("\nWhat is the team ID for the student you want to print?\nTeam ID: ");
+        String teamID = sin.nextLine();
         System.out.print("\nWhat is the eval ID of the student you want to print?\nEval ID:");
         String evalID = sin.nextLine();
         System.out.print("\nWhat should the output file be named?\nFilename:");
         String htmlFilename = sin.nextLine();
 
         try{
+            String flagsForStudent [];
+            flagsForStudent = calcStats(studentID, teamID, evalID);
             String queryString = "Select * from v_response where student2 = '" + studentID + "' and evalID = '" + evalID + "';";
 
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            //createHTMLResult(query(queryString), htmlFilename, 1, false);
+            createHTMLResult(query(queryString), htmlFilename, 1, false, flagsForStudent);
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
@@ -973,6 +980,9 @@ public class PeerEval
         switch (reportType){
             case 1:
                 htmlHeader = "Student View";
+                break;
+            case 2:
+                htmlHeader = "Admin View";
                 break;
         }
 
