@@ -980,6 +980,46 @@ public class PeerEval
             for( int i = 0; i < stats.length; i++)
             {
                 html += "<p>" + stats[i] + "</p>";
+                if (stats[i].contains("Low Performer")){
+                    html += "<p>The members of your team indicated that your contributions to the team " +
+                    "were below expectations. This report gives you details about how the members of your team " +
+                    "perceived your team contributions in five key areas. Please use this information to " +
+                    "identify problem areas in order to contribute effectively in future teamwork situations. " +
+                    "Please contact your course instructor if you need assistance or if you believe that your " +
+                    "ratings were inappropriate.<p>";
+                }
+                if (stats[i].contains("Overconfident")){
+                    html += "<p>Your self-ratings were significantly higher than your teammates. ratings of your " +
+                    "contributions to the team. The members of your team indicated that your contributions to the " +
+                    "team were below expectations. This report gives you details about how the members of your team " +
+                    "perceived your team contributions in five key areas. Please use this information to identify " +
+                    "problem areas in order to contribute effectively in future teamwork situations. Please contact your " +
+                    "course instructor if you need assistance or if you believe that your ratings were inappropriate.<p>";
+                }
+                if (stats[i].contains("High Performer")){
+                    html += "<p>Congratulations! The members of your team have indicated that you were a highly effective " +
+                    "team member. Keep up the good work!<p>";
+                }
+                if (stats[i].contains("Underconfident")){
+                    html += "<p>Your self-ratings were significantly lower than your teammates. ratings of your " +
+                    "contributions to the team. The members of your team have indicated that you were a highly effective " +
+                    "team member. Please try not to minimize the value of your contributions to the team.<p>";
+                }
+                if (stats[i].contains("Manipulator")){
+                    html += "<p>Your self-evaluation indicates you made the primary contribution to the project with little " +
+                    "value added by your teammates. The ratings from your teammates did not concur with your assessment. " +
+                    "Your instructor may require additional information to clarify what happened in your team.<p>";
+                }
+                if (stats[i].contains("Conflict")){
+                    html += "<p>Your evaluation indicates that someone contributed very little to the project. This is not " +
+                    "consistent with the assessment of the rest of the team. Your instructor may require additional " +
+                    "information to clarify what happened in your team.<p>";
+                }
+                if (stats[i].contains("Cliques")){
+                    html += "<p>There was considerable disagreement among your teammates as to which team members were most " +
+                    "effective during team assignments. Your instructor may require additional information to clarify what " +
+                    "happened in your team.<p>";
+                }
             }
             
             html += "</body></html>";
