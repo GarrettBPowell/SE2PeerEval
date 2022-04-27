@@ -640,10 +640,11 @@ public class PeerEval
         try{
 
         //calcs stats and returns all of the flags
-            String flagsForStudent = "";
+            String flagsForStudent [];
             flagsForStudent = calcStats(studentID, teamID, evalID);
             String queryString = "Select * from v_response where student2 = '" + studentID + "';";
 
+            System.out.println(flagsForStudent[0] + " " + flagsForStudent[1] + " " + flagsForStudent[2] + " " + flagsForStudent[3]);
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
@@ -654,7 +655,7 @@ public class PeerEval
             }
     }
 
-    public String calcStats(String stuID, String teamID, String evalID)
+    public String[] calcStats(String stuID, String teamID, String evalID)
     {
         String queryString = "";
         ResultSet rs = null;
@@ -816,15 +817,21 @@ public class PeerEval
             System.out.println("ofStu: "+ teamRatingOfStu);
             //all exceptional condition tags
             System.out.println("Verdict: " + verdict);
-            
-            return verdict;
+
+            String[] stats = new String[4];
+            stats[0] = stuRating.toString();
+            stats[1] = teamAvg.toString();
+            stats[2] = teamRatingOfStu.toString();
+            stats[3] = verdict;
+            return stats;
 
         }
         catch(Exception e)
         {
             System.out.println("Load query failed");
         }
-        return "";
+        String[] stats = new String[]{"0", "0", "0", "None"};
+        return stats;
     }
 
 
