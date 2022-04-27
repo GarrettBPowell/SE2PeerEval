@@ -639,8 +639,9 @@ public class PeerEval
 
         try{
 
+        //calcs stats and returns all of the flags
             String flagsForStudent = "";
-            calcStats(studentID, teamID, evalID);
+            flagsForStudent = calcStats(studentID, teamID, evalID);
             String queryString = "Select * from v_response where student2 = '" + studentID + "';";
 
             //
@@ -653,7 +654,7 @@ public class PeerEval
             }
     }
 
-    public void calcStats(String stuID, String teamID, String evalID)
+    public String calcStats(String stuID, String teamID, String evalID)
     {
         String queryString = "";
         ResultSet rs = null;
@@ -728,10 +729,8 @@ public class PeerEval
                 stdOfTeam = Double.parseDouble(columnValue);
             }
 
-       
 
-            System.out.println("Team Rating Average | Team Rating Average of Student | Student Rating | Verdict");
-
+            //begin assigning tags to student
             String verdict = "";
             String [] options = 
             {
@@ -801,9 +800,18 @@ public class PeerEval
                 else
                     verdict += options[6];
             }
+
+            if(verdict.contains("Low Preformer") && verdict.contains("Overconfident") && verdict.contains("Manipulator"))
+            {
+                if(!verdict.equals(""))
+                    verdict = verdict + ", " + options[5];
+                else
+                    verdict += options[5];
+            }
         
 
             //return verdict;
+             System.out.println("Team Rating Average | Team Rating Average of Student | Student Rating | Verdict");
 
             //students rating of themselves
             System.out.println("StuRating: " + stuRating);
@@ -814,12 +822,14 @@ public class PeerEval
             //all exceptional condition tags
             System.out.println("Verdict: " + verdict);
             
+            return verdict;
 
         }
         catch(Exception e)
         {
             System.out.println("Load query failed");
         }
+        return "";
     }
 
 
