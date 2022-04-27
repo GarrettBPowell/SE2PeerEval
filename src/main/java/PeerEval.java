@@ -627,10 +627,20 @@ public class PeerEval
         Scanner sin = new Scanner(System.in);
         System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
         String studentID = sin.nextLine();
+
+        System.out.print("\nWhat is the team ID for the stats you want to calculate?\nTeam ID: ");
+        String teamID = sin.nextLine();
+
+        System.out.print("\nWhat is the eval ID for the stats you want to calculate?\nEval ID: ");
+        String evalID = sin.nextLine();
+
         System.out.print("\nWhat should the output file be named?\nFilename:");
         String htmlFilename = sin.nextLine();
 
         try{
+
+            String flagsForStudent = "";
+            calcStats(studentID, teamID, evalID);
             String queryString = "Select * from v_response where student2 = '" + studentID + "';";
 
             //
@@ -642,6 +652,123 @@ public class PeerEval
                 System.out.print("Failed printAllStudentResponses");
             }
     }
+
+    public void calcStats(String stuID, String teamID, String evalID)
+    {
+        String queryString = "";
+        ResultSet rs;
+
+        //team values
+        Double teamAvg = 0.0;
+        int teamCount = 0;
+
+        //count of ratings from other students
+        int stuOtherCount = 0;
+        Double teamAvgOfStu = 0.0;
+
+        //individual student values
+        Double stuRating = 0.0;
+        int stuCount = 0;
+
+       
+
+        queryString = "Select student1, student2, value from response join team On response.student1 = team.student where team.evalID = '" + evalID + "' and team.teamid = '" + teamID + "' order by category, student2, student1;";
+        
+        try 
+        {
+            //printResultSet(query(queryString));
+            rs = query(queryString);
+       
+
+
+            //go through query and calculate average for team, average of team opinion of student, and average of student
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) 
+            {
+                for (int i = 1; i <= columnsNumber; i++) 
+                {
+                    //get stu 1 from query
+                    String stu1 = rs.getString(0);
+
+                    //get stu 2 from query
+                    String stu2 = rs.getString(1);
+
+                    //get value from query
+                    int value = rs.getInt(2);
+
+                    //the student is grading themselves, add to stu rating
+                    //inc stu count
+                    if(stu1.equals(stuID) && stu2.equals(stuID))
+                    {
+                        stuCount++;
+                        stuRating += (double)value;
+                    }
+
+                    //another student is rating the student in question
+                    //add value to teamAvg of stu and inc stuOtherCount
+                    else if (!stu1.equals(stuID) && stu2.equals(stuID))
+                    {
+                        stuOtherCount++;
+                        teamAvgOfStu += (double)value;
+                    }
+
+                    //another student is rating themselves or another Student
+                    //add value to other team value (which excludes the student currently being looked at)
+                    //and inc teamCount
+                    else
+                    {
+                        teamAvg += (double)value;
+                        teamCount ++;
+                    }
+               
+                }
+            }
+
+            System.out.println("Team Rating Average | Team Rating Average of Student | Student Rating | Verdict");
+
+            String verdict = "";
+            String [] options = 
+            {
+            "Low Preformer", //0
+            "Overconfident", //1
+            "High Performer", //2
+            "Underconfident", //3
+            "Manipulator", //4
+            "Conflict", //5
+            "Cliques" //6
+            };
+
+
+            //Check low Preformer
+            if(teamAvg <= 2.5)
+            {
+                verdict += options[0];
+            }
+
+            //Check Overconfident
+            if(teamAvg <= 2.5 && stuRating >= 3)
+            {
+                if(!verdict.equals(""))
+                    verdict = verdict + ", " + options[1];
+                else
+                    verdict += options[1];
+            }
+
+            //Check High Preformer
+            //if()
+       
+
+            //return verdict;
+
+             }
+        catch(Exception e)
+        {
+            System.out.println("Calc Stats Failed");
+        }
+    }
+
+
 
     //HTML PRINT
     //prints a single student for a single evalid
