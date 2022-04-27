@@ -378,23 +378,44 @@ insert into student (id, name) values ( 19, 'StudentS');
 
 --Create class table 
 
-drop table if exists class cascade; 
-CREATE TABLE class(
-id int, 
-eval int,
-name text
+drop table if exists course cascade;
+create table course (
+id int,
+abbrev text,
+title text,
+primary key (id)
 );
 
-insert into class (id, eval, name) values ( 1, 1, 'SE2');
-insert into class (id, eval, name)  values ( 2, 2, 'SE3');
-insert into class (id, eval, name)  values ( 3, 3, 'SE4');
-insert into class (id, eval, name)  values ( 4, 4, 'SE5');
-insert into class (id, eval, name)  values ( 5, 5, 'SE6');
-insert into class (id, eval, name)  values ( 6, 6, 'SE7');
-insert into class (id, eval, name)  values ( 7, 7, 'SE8');
-insert into class (id, eval, name)  values ( 8, 8, 'SE9');
-insert into class (id, eval, name)  values ( 9, 9, 'SE10'); 
-insert into class (id, eval, name)  values ( 10, 10, 'SE11');
+insert into course (id, abbrev, title) values
+(1, 'CS374', 'Software Engineering I'),
+(2, 'CS375', 'Software Engineering II'),
+(3, 'CS356', 'Operating Systems'),
+(4, 'CS115', 'S1'),
+(5, 'CS116', 'S2'),
+(6, 'CS120', 'P1'),
+(7, 'CS130', 'P2'),
+(8, 'CS230', 'OOP')
+;
+
+
+drop table if exists section cascade ;
+create table section (
+id int,
+course_id int,
+title text,
+start date,
+primary key (id)
+);
+
+insert into section (id, course_id, title, start) values
+(1, 1, 'Fall 21','2021/09/01'),
+(2, 1, 'Spring 22', '2022/01/01'),
+(3, 2, 'Spring 21', '2021/02/01'),
+(4, 2, 'Fall 21', '2021/09/01'),
+(5, 3, 'Spring 21', '2021/01/01'),
+(6, 4, 'Fall 21', '2021/09/01'),
+(7, 5, 'Spring 22', '2022/01/01')
+;
 
 CREATE VIEW v_response AS
 SELECT evalid as evalid, student1 as student1, student2 as student2, category as category, value as value
