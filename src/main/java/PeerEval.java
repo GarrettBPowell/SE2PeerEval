@@ -625,7 +625,7 @@ public class PeerEval
         try{
             String flagsForStudent [];
             flagsForStudent = calcStats(studentID, teamID, evalID);
-            String queryString = "Select * from v_response where student2 = '" + studentID + "' and evalID = '" + evalID + "';";
+            String queryString = "Select evalid, student2, category from v_response where student2 = '" + studentID + "' and evalID = '" + evalID + "';";
 
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
