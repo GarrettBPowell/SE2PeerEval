@@ -539,7 +539,7 @@ public class PeerEval
             case "2.":
             case "2":
                 System.out.println("(Student Team Statistics)");
-                teamStats();
+                teamStats(true);
                 //createHTML();
                 break;
 
@@ -599,7 +599,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename, 1);
+            createHTMLResult(query(queryString), htmlFilename, 1, false);
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
@@ -609,7 +609,7 @@ public class PeerEval
 
     //HTML PRINT
     //Prints the stats of a specifc student for a specifc team/evalid
-    public void teamStats()
+    public void teamStats(boolean anonymized)
     {
      
         String columnNames = "";
@@ -642,12 +642,13 @@ public class PeerEval
         //calcs stats and returns all of the flags
             String flagsForStudent = "";
             flagsForStudent = calcStats(studentID, teamID, evalID);
-            String queryString = "Select * from v_response where student2 = '" + studentID + "';";
+            String queryString = "Select * from v_response where student2 = '" + studentID + "' and evalid = '" + evalID + "';";
 
+            System.out.println("flagsForStudent:   " + flagsForStudent);
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename, 1);
+            createHTMLResult(query(queryString), htmlFilename, 1, anonymized);
             
             }catch(Exception e){
                 System.out.print("Failed printAllStudentResponses");
@@ -734,7 +735,7 @@ public class PeerEval
             String verdict = "";
             String [] options = 
             {
-            "Low Preformer", //0
+            "Low Performer", //0
             "Overconfident", //1
             "High Performer", //2
             "Underconfident", //3
@@ -744,7 +745,7 @@ public class PeerEval
             };
 
             
-            //Check low Preformer
+            //Check low Performer
             if(teamRatingOfStu <= 2.5)
             {
                 verdict += options[0];
@@ -759,7 +760,7 @@ public class PeerEval
                     verdict += options[1];
             }
 
-            //Check High Preformer
+            //Check High Performer
             if(teamRatingOfStu >= 3.5 && (teamRatingOfStu - teamAvg) >= 0.5)
             { 
                 if(!verdict.equals(""))
@@ -796,7 +797,7 @@ public class PeerEval
             }
 
             //Check Conflict
-            if(verdict.contains("Low Preformer") && verdict.contains("Overconfident") && verdict.contains("Manipulator"))
+            if(verdict.contains("Low Performer") && verdict.contains("Overconfident") && verdict.contains("Manipulator"))
             {
                 if(!verdict.equals(""))
                     verdict = verdict + ", " + options[5];
@@ -809,14 +810,14 @@ public class PeerEval
              System.out.println("Team Rating Average | Team Rating Average of Student | Student Rating | Verdict");
 
             //students rating of themselves
-            System.out.println("StuRating: " + stuRating);
+            System.out.println("Student's Self-rating: " + stuRating);
             //rating of the rest of the team minus stu
-            System.out.println("teamAvg: "+ teamAvg);
+            System.out.println("Team Average: "+ teamAvg);
             //teams rating of stu
-            System.out.println("ofStu: "+ teamRatingOfStu);
+            System.out.println("Team Rating of Student: "+ teamRatingOfStu);
             //all exceptional condition tags
             System.out.println("Verdict: " + verdict);
-            
+
             return verdict;
 
         }
@@ -858,7 +859,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename, 1);
+            createHTMLResult(query(queryString), htmlFilename, 1, false);
             
         }catch(Exception e){
                 System.out.print("Failed printAllStudentResponsesStats");
@@ -925,7 +926,7 @@ public class PeerEval
         System.out.println("Created the HTML file.");
     }
 
-    public void createHTMLResult(ResultSet rs, String htmlFilename, int reportType)
+    public void createHTMLResult(ResultSet rs, String htmlFilename, int reportType, boolean anonymized)
     {
         String htmlHeader = "";
         switch (reportType){
@@ -943,32 +944,34 @@ public class PeerEval
         "</head><body><h1>" + htmlHeader + "</h1><table><tr>";
 
         try{
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
+            if (!anonymized){
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnsNumber = rsmd.getColumnCount();
 
-            // puts table headers for each column in html String
-            for (int i = 1; i <= columnsNumber; i++) 
-                {
-                    if (i > 1) System.out.print(" ");
-                        String columnName = rsmd.getColumnName(i);
-                    html += "<th>" + columnName + "</th>";
-                }
-                html += "</tr><tr>";
-
-            // puts all data in html String
-            while (rs.next()) 
-            {
+                // puts table headers for each column in html String
                 for (int i = 1; i <= columnsNumber; i++) 
+                    {
+                        if (i > 1) System.out.print(" ");
+                            String columnName = rsmd.getColumnName(i);
+                        html += "<th>" + columnName + "</th>";
+                    }
+                    html += "</tr><tr>";
+
+                // puts all data in html String
+                while (rs.next()) 
                 {
-                    if (i > 1) System.out.print(" ");
-                        String columnValue = rs.getString(i);
-                    html += "<td>" + columnValue + "</td>";
+                    for (int i = 1; i <= columnsNumber; i++) 
+                    {
+                        if (i > 1) System.out.print(" ");
+                            String columnValue = rs.getString(i);
+                        html += "<td>" + columnValue + "</td>";
+                    }
+                    System.out.println("");
+                    html += "</tr><tr>";
                 }
-                System.out.println("");
-                html += "</tr><tr>";
             }
 
-            html += "</table></body></html>";
+            html += "</tr></table></body></html>";
         }
         catch(Exception e)
         {
