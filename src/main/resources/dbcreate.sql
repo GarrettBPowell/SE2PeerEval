@@ -381,19 +381,20 @@ insert into student (id, name) values ( 19, 'StudentS');
 drop table if exists class cascade; 
 CREATE TABLE class(
 id int, 
+eval int,
 name text
 );
 
-insert into class (id, name) values ( 1, 'SE2');
-insert into class (id, name) values ( 2, 'SE3');
-insert into class (id, name) values ( 3, 'SE4');
-insert into class (id, name) values ( 4, 'SE5');
-insert into class (id, name) values ( 5, 'SE6');
-insert into class (id, name) values ( 6, 'SE7');
-insert into class (id, name) values ( 7, 'SE8');
-insert into class (id, name) values ( 8, 'SE9');
-insert into class (id, name) values ( 9, 'SE10'); 
-insert into class (id, name) values ( 10, 'SE11');
+insert into class (id, eval, name) values ( 1, 1, 'SE2');
+insert into class (id, eval, name)  values ( 2, 2, 'SE3');
+insert into class (id, eval, name)  values ( 3, 3, 'SE4');
+insert into class (id, eval, name)  values ( 4, 4, 'SE5');
+insert into class (id, eval, name)  values ( 5, 5, 'SE6');
+insert into class (id, eval, name)  values ( 6, 6, 'SE7');
+insert into class (id, eval, name)  values ( 7, 7, 'SE8');
+insert into class (id, eval, name)  values ( 8, 8, 'SE9');
+insert into class (id, eval, name)  values ( 9, 9, 'SE10'); 
+insert into class (id, eval, name)  values ( 10, 10, 'SE11');
 
 CREATE VIEW v_response AS
 SELECT evalid as evalid, student1 as student1, student2 as student2, category as category, value as value
