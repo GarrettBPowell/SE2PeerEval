@@ -670,6 +670,8 @@ public class PeerEval
         //student's rating of rest of team
         Double ratedStudentOfTeam = 0.0;
 
+        Double stdOfTeam = 0.0;
+
        
 
         //queryString = "Select student1, student2, value from response join team On response.student1 = team.student where team.evalID = '" + evalID + "' and team.teamid = '" + teamID + "' order by category, student2, student1;";
@@ -715,6 +717,15 @@ public class PeerEval
             {
                 columnValue = rs.getString("avg");
                 ratedStudentOfTeam = Double.parseDouble(columnValue);
+            }
+
+            //team std
+            queryString = "Select stddev(value) from response join team On response.student1 = team.student where teamid = '" + teamID + "' and team.evalid = '" + evalID + "';";
+            rs = query(queryString);
+            if(rs.next())
+            {
+                columnValue = rs.getString("stddev");
+                stdOfTeam = Double.parseDouble(columnValue);
             }
 
        
@@ -774,6 +785,21 @@ public class PeerEval
                         verdict = verdict + ", " + options[4];
                 else
                     verdict += options[4];
+            }
+
+            //Check Conflict
+            if(true)
+            {
+
+            }
+
+            //std over 2 might indicate cliques
+            if(stdOfTeam >= 2)
+            {
+                if(!verdict.equals(""))
+                    verdict = verdict + ", " + options[6];
+                else
+                    verdict += options[6];
             }
         
 
