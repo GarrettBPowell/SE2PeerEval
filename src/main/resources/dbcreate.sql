@@ -392,7 +392,7 @@ insert into class (id, name) values ( 5, 'SE6');
 insert into class (id, name) values ( 6, 'SE7');
 insert into class (id, name) values ( 7, 'SE8');
 insert into class (id, name) values ( 8, 'SE9');
-insert into class (id, name) values ( 9, 'SE10');
+insert into class (id, name) values ( 9, 'SE10'); 
 insert into class (id, name) values ( 10, 'SE11');
 
 CREATE VIEW v_response AS
