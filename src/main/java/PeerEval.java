@@ -586,18 +586,22 @@ public class PeerEval
         Scanner sin = new Scanner(System.in);
         System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
         String studentID = sin.nextLine();
+        System.out.print("\nWhat is the team ID for the student you want to print?\nTeam ID: ");
+        String teamID = sin.nextLine();
         System.out.print("\nWhat is the eval ID of the student you want to print?\nEval ID:");
         String evalID = sin.nextLine();
         System.out.print("\nWhat should the output file be named?\nFilename:");
         String htmlFilename = sin.nextLine();
 
         try{
+            String flagsForStudent [];
+            flagsForStudent = calcStats(studentID, teamID, evalID);
             String queryString = "Select * from v_response where student2 = '" + studentID + "' and evalID = '" + evalID + "';";
 
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            //createHTMLResult(query(queryString), htmlFilename, 1, false);
+            createHTMLResult(query(queryString), htmlFilename, 1, false, flagsForStudent);
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
