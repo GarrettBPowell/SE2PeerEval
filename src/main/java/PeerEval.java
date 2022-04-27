@@ -478,12 +478,13 @@ public class PeerEval
 
         try{
             String queryString = "Select * from v_response;";
+            
             //if ((anonymized == "Y") || (anonymized == "y")){
             if (anonymized.equals("Y") || anonymized.equals("y")){
-                createHTMLResult(query(queryString), htmlFilename, 1, true);
+                //createHTMLResult(query(queryString), htmlFilename, 1, true);
             }
             else{
-                createHTMLResult(query(queryString), htmlFilename, 1, false);
+                //createHTMLResult(query(queryString), htmlFilename, 1, false);
             }
             
         }catch(Exception e){
@@ -596,7 +597,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename, 1, false);
+            //createHTMLResult(query(queryString), htmlFilename, 1, false);
             
             }catch(Exception e){
                 System.out.print("Failed printSingleStudent");
@@ -645,7 +646,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename, 1, anonymized);
+            createHTMLResult(query(queryString), htmlFilename, 1, anonymized, flagsForStudent);
             
             }catch(Exception e){
                 System.out.print("Failed printAllStudentResponses");
@@ -816,10 +817,10 @@ public class PeerEval
             System.out.println("Verdict: " + verdict);
 
             String[] stats = new String[4];
-            stats[0] = stuRating.toString();
-            stats[1] = teamAvg.toString();
-            stats[2] = teamRatingOfStu.toString();
-            stats[3] = verdict;
+            stats[0] = "Student's Self-rating: " + stuRating.toString();
+            stats[1] = "Team Average: "+ teamAvg.toString();
+            stats[2] = "Team Rating of Student: "+ teamRatingOfStu.toString();
+            stats[3] = "Verdict: " + verdict;
             return stats;
 
         }
@@ -862,7 +863,7 @@ public class PeerEval
             //
             //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
             //printResultSet(query(queryString));
-            createHTMLResult(query(queryString), htmlFilename, 1, false);
+            //createHTMLResult(query(queryString), htmlFilename, 1, false);
             
         }catch(Exception e){
                 System.out.print("Failed printAllStudentResponsesStats");
@@ -929,7 +930,7 @@ public class PeerEval
         System.out.println("Created the HTML file.");
     }
 
-    public void createHTMLResult(ResultSet rs, String htmlFilename, int reportType, boolean anonymized)
+    public void createHTMLResult(ResultSet rs, String htmlFilename, int reportType, boolean anonymized, String[] stats)
     {
         String htmlHeader = "";
         switch (reportType){
@@ -974,7 +975,14 @@ public class PeerEval
                 }
             }
 
-            html += "</tr></table></body></html>";
+            html += "</tr></table>";
+
+            for( int i = 0; i < stats.length; i++)
+            {
+                html += "<p>" + stats[i] + "</p>";
+            }
+            
+            html += "</body></html>";
         }
         catch(Exception e)
         {
