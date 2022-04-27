@@ -417,6 +417,24 @@ insert into section (id, course_id, title, start) values
 (7, 5, 'Spring 22', '2022/01/01')
 ;
 
+drop table if exists eval_section;
+create table eval_section (
+eval_id int,
+section_id int,
+primary key (eval_id, section_id)
+);
+
+insert into eval_section (eval_id, section_id) values
+(1, 1),
+(2, 1),
+(3, 2),
+(4, 3),
+(5, 3),
+(6, 4),
+(7, 5),
+(8, 6),
+(9, 7);
+
 CREATE VIEW v_response AS
 SELECT evalid as evalid, student1 as student1, student2 as student2, category as category, value as value
 FROM response;
