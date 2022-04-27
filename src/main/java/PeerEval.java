@@ -786,12 +786,6 @@ public class PeerEval
                     verdict += options[4];
             }
 
-            //Check Conflict
-            if(true)
-            {
-
-            }
-
             //std over 2 might indicate cliques
             if(stdOfTeam >= 2)
             {
@@ -801,6 +795,7 @@ public class PeerEval
                     verdict += options[6];
             }
 
+            //Check Conflict
             if(verdict.contains("Low Preformer") && verdict.contains("Overconfident") && verdict.contains("Manipulator"))
             {
                 if(!verdict.equals(""))
