@@ -512,6 +512,7 @@ GRANT ALL on category to mrblee;
 GRANT ALL on response to mrblee;
 GRANT ALL on student to mrblee;
 GRANT ALL on team to mrblee;
+GRANT ALL on eval_section to mrblee;
 GRANT ALL on v_average to mrblee;
 GRANT ALL on v_response to mrblee;
 GRANT ALL on v_response_team to mrblee;

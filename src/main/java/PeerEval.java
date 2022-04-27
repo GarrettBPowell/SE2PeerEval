@@ -492,27 +492,6 @@ public class PeerEval
         System.out.print("\nWhat should the output file be named?\nFilename:");
         String htmlFilename = sin.nextLine();
 
-        //backhere
-        /*try
-        {
-            Double classAvg = 0.0;
-            String queryString = "Select avg(value) from response join eval_section on response.evalid = eval_section.eval_id where section_id = '" + sectionID + "';" ;
-            ResultSet rs = null;
-            rs = query(queryString);
-            String columnValue = "";
-            if(rs.next())
-            {
-                columnValue = rs.getString("avg");
-                classAvg = Double.parseDouble(columnValue);
-            }
-
-            String[] stats = new String[1];
-            stats[0] = "Class average: " + classAvg.toString();
-        }
-        catch(Exception e)
-        {
-            System.out.print("Failed class print");
-        }*/
         try{
 
             Double classAvg = 0.0;
@@ -528,15 +507,13 @@ public class PeerEval
 
             String[] stats = new String[1];
             stats[0] = "Class average: " + classAvg.toString();
-            queryString = "Select * from v_response where evalID = '1';";
-            //queryString = "Select * from response join eval_section on response.evalid = eval_section.eval_id where section_id = '" + sectionID + "';";
+            queryString = "Select * from response join eval_section on response.evalid = eval_section.eval_id where section_id = '" + sectionID + "';";
             
-            //if ((anonymized == "Y") || (anonymized == "y")){
             if (anonymized.equals("Y") || anonymized.equals("y")){
-                createHTMLResult(query(queryString), htmlFilename, 1, true, stats);
+                createHTMLResult(query(queryString), htmlFilename, 3, true, stats);
             }
             else{
-                createHTMLResult(query(queryString), htmlFilename, 1, false, stats);
+                createHTMLResult(query(queryString), htmlFilename, 3, false, stats);
             }
             
         }catch(Exception e){
@@ -995,6 +972,9 @@ public class PeerEval
                 break;
             case 2:
                 htmlHeader = "Admin View";
+                break;
+            case 3:
+                htmlHeader = "Teacher View";
                 break;
         }
 
