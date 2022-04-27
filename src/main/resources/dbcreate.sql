@@ -3,6 +3,7 @@ drop database if exists cs375v1;
 CREATE DATABASE cs375v1 encoding 'UTF-8';
 \c cs375v1;
 
+
 -- Creates category table
 drop table if exists category cascade;
 CREATE TABLE category (
@@ -422,32 +423,32 @@ limit 10;
 */
 
 CREATE VIEW teacherAnon AS 
-SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
-FROM response  group by eval, team order by eval; 
+SELECT eval, json_agg(json_build_object('cat',cat, 'v',v)) 
+FROM v_response_team  group by eval, team order by eval; 
 
 CREATE VIEW teacherAll AS 
 SELECT *
-FROM response; 
+FROM v_response_team; 
 
 CREATE VIEW studentImmediate AS 
-SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
-JOIN student ON response.s1 = student.id 
-GROUP BY class.id
-FROM response;
+SELECT evalid, json_agg(json_build_object('cat',category)) 
+FROM student
+JOIN response ON response.student1 = student.id 
+GROUP BY response.evalid;
 
 CREATE VIEW studentLifetime AS 
-SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
-JOIN student ON response.s1 = student.id 
-FROM response;
+SELECT eval, json_agg(json_build_object('cat',cat, 'v',v)) 
+FROM student
+JOIN student ON response.student1 = student.id ;
 
 CREATE VIEW studentTeams AS 
-SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v))
-JOIN team ON student.id = team.student 
-FROM response; 
+SELECT eval, json_agg(json_build_object('cat',cat, 'v',v))
+FROM v_response_team
+JOIN team ON student.id = team.student ; 
 
 CREATE VIEW adminAll AS 
 SELECT * 
-FROM response; 
+FROM v_response_team; 
 
 
 GRANT ALL on category to mrblee;
