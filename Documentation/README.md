@@ -1,16 +1,27 @@
 # SE2PeerEval
 
+Project Description:
 The latest and greatest state of the art peer evaluation software. Efficently evaluate your team member's contributions to projects.
 
+Running the Project:
+Project can be run via command prompt from Project Folder SE2PeerEval with the following commands
+ mvn install assembly:assembly
+ java -cp target/java_postgres-1.0-SNAPSHOT-jar-with-dependencies.jar PeerEval
+
+To load files into the database, put the csv file you want to load into the resources folder of the project and then run the project with the 
+commands above. This folder can be located at SE2PeerEval\src\main\resources
+
+
+Information:
 Members:
 Christa Greenwood
 Megan Skeen
 Garrett Powell
 
 Roles:
-Christa Greenwood - Developer
-Megan Skeen - Documenter
-Garrett Powell - Tester
+Christa Greenwood - Database Managment 
+Megan Skeen - Documenter, Tester
+Garrett Powell - Java Developer
 
 # Glossary:
 
@@ -46,8 +57,8 @@ Garrett Powell - Tester
 
 Abstract Classes:
 
-- The Team class is abstract because a team must contain members in order to exist, and the functions of the team will be inherited by each member.
+- The User class is abstract because a user has different types and permissions based on the user.
 
 Final Classes:
 
-- The Team Member class is final because there is no class in this assignment which needs to inherit all attributes and methods of the Team Member class. The Team Member class is the lowest class in the hierarchy.
+- The Student class is final because there is no class in this assignment which needs to inherit all attributes and methods of a student class. There would be no permissions lower than them and so it is a final class. 
