@@ -493,10 +493,7 @@ public class PeerEval
         String htmlFilename = sin.nextLine();
 
         //backhere
-
-
-        
-        try
+        /*try
         {
             Double classAvg = 0.0;
             String queryString = "Select avg(value) from response join eval_section on response.evalid = eval_section.eval_id where section_id = '" + sectionID + "';" ;
@@ -510,21 +507,36 @@ public class PeerEval
             }
 
             String[] stats = new String[1];
-            stats[0] = classAvg.toString();
+            stats[0] = "Class average: " + classAvg.toString();
         }
         catch(Exception e)
         {
             System.out.print("Failed class print");
-        }
+        }*/
         try{
-            String queryString = "Select * from v_response;";
+
+            Double classAvg = 0.0;
+            String queryString = "Select avg(value) from response join eval_section on response.evalid = eval_section.eval_id where section_id = '" + sectionID + "';" ;
+            ResultSet rs = null;
+            rs = query(queryString);
+            String columnValue = "";
+            if(rs.next())
+            {
+                columnValue = rs.getString("avg");
+                classAvg = Double.parseDouble(columnValue);
+            }
+
+            String[] stats = new String[1];
+            stats[0] = "Class average: " + classAvg.toString();
+            queryString = "Select * from v_response where evalID = '1';";
+            //queryString = "Select * from response join eval_section on response.evalid = eval_section.eval_id where section_id = '" + sectionID + "';";
             
             //if ((anonymized == "Y") || (anonymized == "y")){
             if (anonymized.equals("Y") || anonymized.equals("y")){
-                //createHTMLResult(query(queryString), htmlFilename, 1, true);
+                createHTMLResult(query(queryString), htmlFilename, 1, true, stats);
             }
             else{
-                //createHTMLResult(query(queryString), htmlFilename, 1, false);
+                createHTMLResult(query(queryString), htmlFilename, 1, false, stats);
             }
             
         }catch(Exception e){
