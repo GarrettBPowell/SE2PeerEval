@@ -871,36 +871,8 @@ public class PeerEval
     //prints a single student for a single evalid
     public void printAllStudentResponsesStats()
     {
-     
-        String columnNames = "";
-        c = null;
 
-        try{
-            Class.forName("org.postgresql.Driver");
-            c = pe.connect("jdbc:postgresql://localhost:5432/cs375v1", "mrblee", "purplewhite");
-        } catch(Exception e)
-        {
-            System.out.println("Failed to connect to database when loading data");
-            e.printStackTrace();
-        }
-
-        Scanner sin = new Scanner(System.in);
-        System.out.print("\nWhat is the student ID of the student?\nStudent ID: ");
-        String studentID = sin.nextLine();
-        System.out.print("\nWhat should the output file be named?\nFilename:");
-        String htmlFilename = sin.nextLine();
-
-        try{
-            String queryString = "Select * from v_response where student2 = '" + studentID + "';";
-
-            //
-            //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
-            //printResultSet(query(queryString));
-            //createHTMLResult(query(queryString), htmlFilename, 1, false);
-            
-        }catch(Exception e){
-                System.out.print("Failed printAllStudentResponsesStats");
-            }
+        printClassReport();
     }
 
     //prints a given result set entirely
