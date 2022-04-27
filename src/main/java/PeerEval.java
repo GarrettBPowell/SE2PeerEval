@@ -438,7 +438,21 @@ public class PeerEval
         String classID = sin.nextLine();
 
         try{
+        Double alltimeAvg = 0.0;
             System.out.println("Printed Admin");
+            ResultSet rs = null;
+            String queryString = "Select avg(value) from response";
+            rs = query(queryString);
+            String columnValue = "";
+            if(rs.next())
+            {
+                columnValue = rs.getString("avg");
+                alltimeAvg = Double.parseDouble(columnValue);
+            }
+
+            String[] stats = new String[1];
+            stats[0] = alltimeAvg.toString();
+           
             //String queryString = "Select * from v_response where student2 = '" + classID;
 
             //
@@ -476,6 +490,24 @@ public class PeerEval
         System.out.print("\nWhat should the output file be named?\nFilename:");
         String htmlFilename = sin.nextLine();
 
+        //backhere
+        /*
+        try
+        {
+            queryString = "Select avg(value) from response join team On response.student1 = team.student where student1 = '" + stuID + "' and student2 = '" + stuID + "' and team.evalid = '" + evalID + "' and teamID = '" + teamID + "';";
+            
+            rs = query(queryString);
+            String columnValue = "";
+            if(rs.next())
+            {
+                columnValue = rs.getString("avg");
+                stuRating = Double.parseDouble(columnValue);
+            }
+        }
+        catch(Exception e)
+        {
+
+        }*/
         try{
             String queryString = "Select * from v_response;";
             
