@@ -473,21 +473,18 @@ public class PeerEval
         String classID = sin.nextLine();
         System.out.print("\nWould you like the data anonymized?\nY/N: ");
         String anonymized = sin.nextLine();
+        System.out.print("\nWhat should the output file be named?\nFilename:");
+        String htmlFilename = sin.nextLine();
 
         try{
+            String queryString = "Select * from v_response;";
             //if ((anonymized == "Y") || (anonymized == "y")){
             if (anonymized.equals("Y") || anonymized.equals("y")){
-                System.out.println("Printed Anonymized Class Report");
+                createHTMLResult(query(queryString), htmlFilename, 1, true);
             }
             else{
-                System.out.println("Printed Class Report");
+                createHTMLResult(query(queryString), htmlFilename, 1, false);
             }
-            //String queryString = "Select * from v_response where student2 = '" + classID;
-
-            //
-            //System.out.println("Select * from v_response where student2 = '2' AND evalid = '999';");
-            //printResultSet(query(queryString));
-            //createHTMLResult(query(queryString));
             
         }catch(Exception e){
                 System.out.print("Failed printAllStudentResponsesStats");
