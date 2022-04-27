@@ -309,24 +309,6 @@ insert into response (evalid, student1, student2, category, value) values (1, 15
 -- Displays all responses in the response table
 --select * from response;
 
-drop table if exists eval_section;
-create table eval_section (
-eval_id int,
-section_id int,
-primary key (eval_id, section_id)
-);
-
-insert into eval_section (eval_id, section_id) values
-(1, 1),
-(2, 1),
-(3, 2),
-(4, 3),
-(5, 3),
-(6, 4),
-(7, 5),
-(8, 6),
-(9, 7);
-
 
 -- Creates team table
 drop table if exists team cascade;
