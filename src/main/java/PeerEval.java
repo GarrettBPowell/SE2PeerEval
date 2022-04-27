@@ -656,74 +656,56 @@ public class PeerEval
     public void calcStats(String stuID, String teamID, String evalID)
     {
         String queryString = "";
-        ResultSet rs;
+        ResultSet rs = null;
 
         //team values
-        Double teamAvg = 0.0;
-        int teamCount = 0;
+        Double teamAvg = 0.0;;
 
         //count of ratings from other students
-        int stuOtherCount = 0;
-        Double teamAvgOfStu = 0.0;
+        Double teamRatingOfStu = 0.0;
 
-        //individual student values
+        //students rating of themselves
         Double stuRating = 0.0;
-        int stuCount = 0;
 
        
 
-        queryString = "Select student1, student2, value from response join team On response.student1 = team.student where team.evalID = '" + evalID + "' and team.teamid = '" + teamID + "' order by category, student2, student1;";
+        //queryString = "Select student1, student2, value from response join team On response.student1 = team.student where team.evalID = '" + evalID + "' and team.teamid = '" + teamID + "' order by category, student2, student1;";
         
         try 
         {
+        //get query
             //printResultSet(query(queryString));
+            //student's self rating
+            
+            queryString = "Select avg(value) from response join team On response.student1 = team.student where student1 = '" + stuID + "' and student2 = '" + stuID + "' and team.evalid = '" + evalID + "' and teamID = '" + teamID + "';";
+            
             rs = query(queryString);
-       
-
-
-            //go through query and calculate average for team, average of team opinion of student, and average of student
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-            while (rs.next()) 
+            String columnValue = "";
+            if(rs.next())
             {
-                for (int i = 1; i <= columnsNumber; i++) 
-                {
-                    //get stu 1 from query
-                    String stu1 = rs.getString(0);
-
-                    //get stu 2 from query
-                    String stu2 = rs.getString(1);
-
-                    //get value from query
-                    int value = rs.getInt(2);
-
-                    //the student is grading themselves, add to stu rating
-                    //inc stu count
-                    if(stu1.equals(stuID) && stu2.equals(stuID))
-                    {
-                        stuCount++;
-                        stuRating += (double)value;
-                    }
-
-                    //another student is rating the student in question
-                    //add value to teamAvg of stu and inc stuOtherCount
-                    else if (!stu1.equals(stuID) && stu2.equals(stuID))
-                    {
-                        stuOtherCount++;
-                        teamAvgOfStu += (double)value;
-                    }
-
-                    //another student is rating themselves or another Student
-                    //add value to other team value (which excludes the student currently being looked at)
-                    //and inc teamCount
-                    else
-                    {
-                        teamAvg += (double)value;
-                        teamCount ++;
-                    }
-               
-                }
+                columnValue = rs.getString("avg");
+                stuRating = Double.parseDouble(columnValue);
             }
+
+            //other students rating of the student
+            queryString = "Select avg(value) from response join team On response.student1 = team.student where student1 <> '" + stuID + "' and student2 = '" + stuID + "' and teamid = '" + teamID + "' and team.evalid = '" + evalID + "';";
+            rs = query(queryString);
+            if(rs.next())
+            {
+                columnValue = rs.getString("avg");
+                teamRatingOfStu = Double.parseDouble(columnValue);
+            }
+
+            //average of team - teams rating of student
+            queryString = "Select avg(value) from response join team On response.student1 = team.student where student2 <> '" + stuID + "' and teamid = '" + teamID + "' and team.evalid = '" + evalID + "';";
+            rs = query(queryString);
+            if(rs.next())
+            {
+                columnValue = rs.getString("avg");
+                teamAvg = Double.parseDouble(columnValue);
+            }
+
+       
 
             System.out.println("Team Rating Average | Team Rating Average of Student | Student Rating | Verdict");
 
@@ -739,15 +721,15 @@ public class PeerEval
             "Cliques" //6
             };
 
-
+            
             //Check low Preformer
-            if(teamAvg <= 2.5)
+            if(teamRatingOfStu <= 2.5)
             {
                 verdict += options[0];
             }
 
             //Check Overconfident
-            if(teamAvg <= 2.5 && stuRating >= 3)
+            if(teamRatingOfStu <= 2.5 && stuRating >= 3)
             {
                 if(!verdict.equals(""))
                     verdict = verdict + ", " + options[1];
@@ -756,15 +738,31 @@ public class PeerEval
             }
 
             //Check High Preformer
-            //if()
-       
+            if(teamRatingOfStu >= 3.5 && (teamRatingOfStu - teamAvg) >= 0.5)
+            { 
+                if(!verdict.equals(""))
+                    verdict = verdict + ", " + options[2];
+                else
+                    verdict += options[2];
+            }
+        
 
             //return verdict;
 
-             }
+            //students rating of themselves
+            System.out.println("StuRating: " + stuRating);
+            //rating of the rest of the team minus stu
+            System.out.println("teamAvg: "+ teamAvg);
+            //teams rating of stu
+            System.out.println("ofStu: "+ teamRatingOfStu);
+            //all exceptional condition tags
+            System.out.println("Verdict: " + verdict);
+            
+
+        }
         catch(Exception e)
         {
-            System.out.println("Calc Stats Failed");
+            System.out.println("Load query failed");
         }
     }
 
@@ -817,7 +815,7 @@ public class PeerEval
                 for (int i = 1; i <= columnsNumber; i++) 
                 {
                     if (i > 1) System.out.print(",  ");
-                        String columnValue = rs.getString(i);
+                    String columnValue = rs.getString(i);
                     System.out.print(columnValue + " " + rsmd.getColumnName(i));
                 }
                 System.out.println("");
