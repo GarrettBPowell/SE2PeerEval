@@ -667,6 +667,9 @@ public class PeerEval
         //students rating of themselves
         Double stuRating = 0.0;
 
+        //student's rating of rest of team
+        Double ratedStudentOfTeam = 0.0;
+
        
 
         //queryString = "Select student1, student2, value from response join team On response.student1 = team.student where team.evalID = '" + evalID + "' and team.teamid = '" + teamID + "' order by category, student2, student1;";
@@ -703,6 +706,15 @@ public class PeerEval
             {
                 columnValue = rs.getString("avg");
                 teamAvg = Double.parseDouble(columnValue);
+            }
+
+            //average of team rated by this student
+            queryString = "Select avg(value) from response join team On response.student1 = team.student where student1 = '" + stuID + "' and student2 <> '" + stuID + "' and teamid = '" + teamID + "' and team.evalid = '" + evalID + "';";
+            rs = query(queryString);
+            if(rs.next())
+            {
+                columnValue = rs.getString("avg");
+                ratedStudentOfTeam = Double.parseDouble(columnValue);
             }
 
        
@@ -744,6 +756,24 @@ public class PeerEval
                     verdict = verdict + ", " + options[2];
                 else
                     verdict += options[2];
+            }
+
+            //Check Underconfident
+            if(teamRatingOfStu >= 3.0 && (teamRatingOfStu - stuRating) >= 1)
+            {
+                 if(!verdict.equals(""))
+                    verdict = verdict + ", " + options[3];
+                 else
+                    verdict += options[3];
+            }
+
+            //Check Manipulator
+            if(stuRating >= 4 && (stuRating - ratedStudentOfTeam) >= 2)
+            {
+                if(!verdict.equals(""))
+                        verdict = verdict + ", " + options[4];
+                else
+                    verdict += options[4];
             }
         
 
