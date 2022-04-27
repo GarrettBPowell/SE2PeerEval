@@ -423,16 +423,31 @@ limit 10;
 
 CREATE VIEW teacherAnon AS 
 SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
-FROM v_response_team  group by eval, team order by eval; 
+FROM response  group by eval, team order by eval; 
 
 CREATE VIEW teacherAll AS 
 SELECT *
-FROM v_response_team; 
+FROM response; 
 
---CREATE VIEW studentImmediate AS 
---SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
---FROM v_response_team 
---WHERE s1 = 
+CREATE VIEW studentImmediate AS 
+SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
+JOIN student ON response.s1 = student.id 
+GROUP BY class.id
+FROM response;
+
+CREATE VIEW studentLifetime AS 
+SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v)) 
+JOIN student ON response.s1 = student.id 
+FROM response;
+
+CREATE VIEW studentTeams AS 
+SELECT eval, team, json_agg(json_build_object('cat',cat, 'v',v))
+JOIN team ON student.id = team.student 
+FROM response; 
+
+CREATE VIEW adminAll AS 
+SELECT * 
+FROM response; 
 
 
 GRANT ALL on category to mrblee;
