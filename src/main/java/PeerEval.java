@@ -434,8 +434,7 @@ public class PeerEval
         }
 
         Scanner sin = new Scanner(System.in);
-        System.out.print("\nAdmin View?\nAdmin ID: ");
-        String classID = sin.nextLine();
+        System.out.print("\nAdmin View:");
 
         try{
         Double alltimeAvg = 0.0;
@@ -483,31 +482,37 @@ public class PeerEval
         }
 
         Scanner sin = new Scanner(System.in);
-        System.out.print("\nWhat is the class ID?\nClass ID: ");
-        String classID = sin.nextLine();
+        System.out.print("\nWhat is the section ID?\nSection ID: ");
+        String sectionID = sin.nextLine();
         System.out.print("\nWould you like the data anonymized?\nY/N: ");
         String anonymized = sin.nextLine();
         System.out.print("\nWhat should the output file be named?\nFilename:");
         String htmlFilename = sin.nextLine();
 
         //backhere
-        /*
+
+
+        
         try
         {
-            queryString = "Select avg(value) from response join team On response.student1 = team.student where student1 = '" + stuID + "' and student2 = '" + stuID + "' and team.evalid = '" + evalID + "' and teamID = '" + teamID + "';";
-            
+            Double classAvg = 0.0;
+            String queryString = "Select avg(value) from response join eval_section on response.evalid = eval_section.eval_id where section_id = '" + sectionID + "';" ;
+            ResultSet rs = null;
             rs = query(queryString);
             String columnValue = "";
             if(rs.next())
             {
                 columnValue = rs.getString("avg");
-                stuRating = Double.parseDouble(columnValue);
+                classAvg = Double.parseDouble(columnValue);
             }
+
+            String[] stats = new String[1];
+            stats[0] = classAvg.toString();
         }
         catch(Exception e)
         {
-
-        }*/
+            System.out.print("Failed class print");
+        }
         try{
             String queryString = "Select * from v_response;";
             
