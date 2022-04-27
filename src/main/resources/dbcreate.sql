@@ -512,10 +512,23 @@ GRANT ALL on category to mrblee;
 GRANT ALL on response to mrblee;
 GRANT ALL on student to mrblee;
 GRANT ALL on team to mrblee;
+<<<<<<< HEAD
 GRANT ALL on eval_section to mrblee;
+=======
+GRANT ALL on course to mrblee; 
+GRANT ALL on section to mrblee; 
+GRANT ALL on eval_section to mrblee; 
+
+>>>>>>> 25fe652261e7a6dffc6e6a7c7027d50c08492d3a
 GRANT ALL on v_average to mrblee;
 GRANT ALL on v_response to mrblee;
 GRANT ALL on v_response_team to mrblee;
 GRANT ALL on v_stuavg to mrblee;
 GRANT ALL on v_stuavgnoself to mrblee;
 GRANT ALL on v_teams to mrblee;
+GRANT ALL on teacherAnon to mrblee; 
+GRANT ALL on teacherAll to mrblee; 
+GRANT ALL on studentImmediate to mrblee; 
+GRANT ALL on studentLifetime to mrblee;  
+GRANT ALL on studentTeams to mrblee; 
+GRANT ALL on adminAll to mrblee; 
